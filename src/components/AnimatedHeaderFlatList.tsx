@@ -2,6 +2,7 @@ import {
   StyleSheet,
   View,
   type LayoutChangeEvent,
+  type ListRenderItemInfo,
   type ViewStyle,
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
@@ -10,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/AnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
 
+// Types
 interface Props {
   title: string;
   titleStyle?: ViewStyle;
@@ -30,47 +32,23 @@ export function AnimatedHeaderFlatList<T>({
 }: AnimatedHeaderFlatListProps<T>) {
   const navigation = useNavigation();
 
-  // const headerScaleStyle = useAnimatedStyle(() => {
-  //   const scale = interpolate(
-  //     scrollY.value,
-  //     [0, scrollY.value],
-  //     [1, scrollY.value < 0 ? 1 + Math.abs(scrollY.value) / headerHeight.value : 1],
-  //     'clamp'
-  //   )
-
-  //   return {
-  //     transform: [
-  //       {
-  //         translateY: -navigationBarHeight * (scale - 1) * 2.5,
-  //       },
-  //       {
-  //         scale: scale,
-  //       },
-  //     ],
-  //   }
-  // })
-
-  // const headerOpacityStyle = useAnimatedStyle(() => {
-  //   return {
-  //     opacity: interpolate(
-  //       scrollY.value,
-  //       [0, headerHeight.value - navigationBarHeight],
-  //       [1, 0],
-  //       'clamp'
-  //     ),
-  //   }
-  // })
-
+  // Hooks
   const {
     scrollHandler,
+    navigationBarHeight,
     navigationTitleAnimatedStyle,
+    headerTitleAnimatedStyle,
+    stickyHeaderAnimatedStyle,
     headerLayout,
     headerTitleLayout,
   } = useAnimatedHeaderFlatListAnimatedStyles();
 
-  const headerTitle = useCallback(
+  // Navigation Header
+  const navigationTitle = useCallback(
     () => (
-      <Animated.Text style={[navigationTitleAnimatedStyle, titleStyle]}>
+      <Animated.Text
+        style={[navigationTitleAnimatedStyle, titleStyle, styles.titleStyle]}
+      >
         {title}
       </Animated.Text>
     ),
@@ -81,66 +59,157 @@ export function AnimatedHeaderFlatList<T>({
     navigation.setOptions({
       headerShown: true,
       headerTransparent: true,
-      headerTitle: headerTitle,
+      headerTitle: navigationTitle,
     });
-  }, [headerTitle, navigation]);
+  }, [navigationTitle, navigation]);
 
+  // Header Component
   const ListHeaderComponent = useMemo(() => {
     return (
-      <View
-        onLayout={(event: LayoutChangeEvent) => {
-          headerLayout.value = event.nativeEvent.layout;
-        }}
-      >
-        <HeaderComponent style={styles.header} />
-        {/* <SmoothTransitionTitle
-          title={title}
+      <View style={styles.headerWrapper}>
+        <View
+          style={[styles.headerContainer, { top: -navigationBarHeight }]}
           onLayout={(event: LayoutChangeEvent) => {
-            console.log('event', event.nativeEvent.layout);
-            headerTitleHeight.value = event.nativeEvent.layout.height;
-            headerTitleWidth.value = event.nativeEvent.layout.width;
+            headerLayout.value = {
+              x: event.nativeEvent.layout.x,
+              y: event.nativeEvent.layout.y,
+              width: event.nativeEvent.layout.width,
+              height: event.nativeEvent.layout.height + navigationBarHeight,
+            };
           }}
-        /> */}
-        <Animated.Text
-          onLayout={(event: LayoutChangeEvent) => {
-            headerTitleLayout.value = event.nativeEvent.layout;
-          }}
-          style={[styles.headerTitle, titleStyle]}
         >
-          {title}
-        </Animated.Text>
+          <HeaderComponent style={styles.header} />
+          <Animated.Text
+            onLayout={(event: LayoutChangeEvent) => {
+              headerTitleLayout.value = event.nativeEvent.layout;
+            }}
+            style={[headerTitleAnimatedStyle, styles.headerTitle, titleStyle]}
+          >
+            {title}
+          </Animated.Text>
+        </View>
       </View>
     );
-  }, [HeaderComponent, titleStyle, title, headerLayout, headerTitleLayout]);
+  }, [
+    navigationBarHeight,
+    HeaderComponent,
+    headerTitleAnimatedStyle,
+    titleStyle,
+    title,
+    headerLayout,
+    headerTitleLayout,
+  ]);
 
+  // List Item Renderer
+  const renderItem = useCallback(
+    ({ item }: { item: 'HEADER' | T }) => {
+      if (item === 'HEADER') {
+        return (
+          <View
+            style={[
+              styles.stickyHeaderContainer,
+              {
+                height: navigationBarHeight,
+              },
+            ]}
+          >
+            <Animated.View
+              style={[
+                stickyHeaderAnimatedStyle,
+                styles.stickyHeader,
+                {
+                  bottom: headerLayout.value.height - navigationBarHeight * 2,
+                },
+              ]}
+            >
+              {ListHeaderComponent}
+            </Animated.View>
+          </View>
+        );
+      }
+      return flatListProps.renderItem &&
+        typeof flatListProps.renderItem === 'function'
+        ? flatListProps.renderItem({ item } as ListRenderItemInfo<T>)
+        : null;
+    },
+    [
+      flatListProps,
+      navigationBarHeight,
+      stickyHeaderAnimatedStyle,
+      headerLayout.value.height,
+      ListHeaderComponent,
+    ]
+  );
+
+  // Main Render
   return (
     <Animated.FlatList
-      ListHeaderComponent={ListHeaderComponent}
-      onScroll={scrollHandler}
       {...flatListProps}
+      style={styles.flatList}
+      stickyHeaderHiddenOnScroll={false}
+      stickyHeaderIndices={[1]}
+      ListHeaderComponent={
+        <View
+          style={[
+            styles.mainHeaderContainer,
+            {
+              height: headerLayout.value.height - navigationBarHeight * 2,
+              transform: [{ translateY: navigationBarHeight }],
+            },
+          ]}
+        >
+          {ListHeaderComponent}
+        </View>
+      }
+      onScroll={scrollHandler}
+      data={[
+        'HEADER',
+        ...(Array.isArray(flatListProps.data) ? flatListProps.data : []),
+      ]}
+      renderItem={renderItem}
     />
   );
 }
 
 const styles = StyleSheet.create({
+  titleStyle: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  headerWrapper: {
+    overflow: 'visible',
+  },
+  headerContainer: {
+    left: 0,
+    right: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+  },
+  stickyHeaderContainer: {
+    overflow: 'scroll',
+  },
+  stickyHeader: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+  },
+  flatList: {
+    overflow: 'scroll',
+  },
+  mainHeaderContainer: {
+    overflow: 'visible',
+  },
   header: {
     position: 'absolute',
-  },
-  headerTitle: {
-    position: 'absolute',
-  },
-  headerBackground: {
-    ...StyleSheet.absoluteFillObject,
     overflow: 'hidden',
-  },
-  navigationTitle: {
-    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    textAlign: 'center',
-    fontSize: 17,
-    fontWeight: '600',
-    color: 'white',
+    bottom: 0,
+  },
+  headerTitle: {
+    position: 'absolute',
   },
 });
