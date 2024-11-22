@@ -1,21 +1,26 @@
 import { useCallback } from 'react';
-import { ImageBackground, StyleSheet, Text } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
   const data = Array.from({ length: 100 }, (_, index) => index.toString());
-  const title = 'Title';
-  const backgroundImageUrl =
+  const title = 'Animated Title';
+  const imageUrl =
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
 
-  const HeaderComponent = useCallback(
+  const HeaderBackground = useCallback(
+    () => <View style={styles.headerBackground} />,
+    []
+  );
+
+  const HeaderContent = useCallback(
     () => (
       <ImageBackground
-        source={{ uri: backgroundImageUrl }}
-        style={styles.header}
+        source={{ uri: imageUrl }}
+        style={styles.headerContent}
       />
     ),
-    [backgroundImageUrl]
+    [imageUrl]
   );
 
   const StickyComponent = useCallback(
@@ -27,7 +32,8 @@ export default function HomeScreen() {
     <AnimatedHeaderFlatList
       title={title}
       titleStyle={styles.headerTitle}
-      HeaderComponent={HeaderComponent}
+      HeaderBackground={HeaderBackground}
+      HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
       data={data}
       renderItem={({ item }) => <Text>{item}</Text>}
@@ -36,8 +42,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
+  headerBackground: {
+    height: 250,
     backgroundColor: 'lightblue',
+  },
+  headerContent: {
     height: 250,
   },
   headerTitle: {

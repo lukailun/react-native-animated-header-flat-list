@@ -2,12 +2,23 @@
 
 A React Native FlatList component with an animated collapsible header, featuring parallax image effects, blur overlay, and smooth title transitions. Perfect for social media feeds, profiles, and content-rich screens.
 
+## Preview
+
+### iOS
+
+![iOS](./assets/iOS.mp4)
+
+### Android
+
+![Android](./assets/Android.mp4)
+
 ## Features
 
 - Animated collapsible header with parallax effect
 - Smooth title transition from header to navigation bar
 - Optional sticky component support
 - Fully customizable header and title styles
+- Separate background and content layers in header
 - TypeScript support
 
 ## Installation
@@ -18,22 +29,30 @@ npm install react-native-animated-header-flat-list
 
 ## Usage
 
-
 ```tsx
+import { useCallback } from 'react';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
+
 export default function HomeScreen() {
   const data = Array.from({ length: 100 }, (_, index) => index.toString());
-  const title = 'Title';
-  const backgroundImageUrl =
+  const title = 'Animated Title';
+  const imageUrl =
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
 
-  const HeaderComponent = useCallback(
+  const HeaderBackground = useCallback(
+    () => <View style={styles.headerBackground} />,
+    []
+  );
+
+  const HeaderContent = useCallback(
     () => (
       <ImageBackground
-        source={{ uri: backgroundImageUrl }}
-        style={styles.header}
+        source={{ uri: imageUrl }}
+        style={styles.headerContent}
       />
     ),
-    [backgroundImageUrl]
+    [imageUrl]
   );
 
   const StickyComponent = useCallback(
@@ -45,7 +64,8 @@ export default function HomeScreen() {
     <AnimatedHeaderFlatList
       title={title}
       titleStyle={styles.headerTitle}
-      HeaderComponent={HeaderComponent}
+      HeaderBackground={HeaderBackground}
+      HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
       data={data}
       renderItem={({ item }) => <Text>{item}</Text>}
@@ -54,8 +74,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
+  headerBackground: {
+    height: 250,
     backgroundColor: 'lightblue',
+  },
+  headerContent: {
     height: 250,
   },
   headerTitle: {
@@ -72,16 +95,16 @@ const styles = StyleSheet.create({
 });
 ```
 
+### Props
 
-## Props
-
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `title` | string | Yes | The title text that will animate between header and navigation bar |
-| `titleStyle` | ViewStyle | No | Style object for the title text |
-| `HeaderComponent` | React.ComponentType | Yes | Component to be rendered as the header |
-| `StickyComponent` | React.ComponentType | No | Optional component that sticks below HeaderComponent |
-| `...FlatListProps` | FlatListProps | - | All standard FlatList props are supported |
+| Prop               | Type                | Required | Description                                                                                                               |
+| ------------------ | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `title`            | string              | Yes      | The title text that will animate between header and navigation bar                                                        |
+| `titleStyle`       | ViewStyle           | No       | Style object for the title text                                                                                           |
+| `HeaderBackground` | React.ComponentType | Yes      | Component to be rendered as the header background                                                                         |
+| `HeaderContent`    | React.ComponentType | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
+| `StickyComponent`  | React.ComponentType | No       | Optional component that sticks below the navigation bar                                                                   |
+| `...FlatListProps` | FlatListProps       | -        | All standard FlatList props are supported                                                                                 |
 
 ## Contributing
 

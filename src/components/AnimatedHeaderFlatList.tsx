@@ -15,7 +15,8 @@ import Animated from 'react-native-reanimated';
 interface Props {
   title: string;
   titleStyle?: ViewStyle;
-  HeaderComponent: React.ComponentType<any>;
+  HeaderBackground: React.ComponentType<any>;
+  HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
 }
 
@@ -28,7 +29,8 @@ type AnimatedHeaderFlatListProps<T> = Omit<
 export function AnimatedHeaderFlatList<T>({
   title,
   titleStyle,
-  HeaderComponent,
+  HeaderBackground,
+  HeaderContent,
   StickyComponent,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
@@ -38,14 +40,15 @@ export function AnimatedHeaderFlatList<T>({
   const {
     scrollHandler,
     navigationBarHeight,
-    navigationTitleAnimatedStyle,
-    headerTitleAnimatedStyle,
-    stickyHeaderAnimatedStyle,
     headerLayout,
     setHeaderLayout,
     setHeaderTitleLayout,
     stickyComponentLayout,
     setStickyComponentLayout,
+    navigationTitleAnimatedStyle,
+    headerTitleAnimatedStyle,
+    stickyHeaderAnimatedStyle,
+    headerContentAnimatedStyle,
   } = useAnimatedHeaderFlatListAnimatedStyles();
 
   // Navigation Header
@@ -83,7 +86,18 @@ export function AnimatedHeaderFlatList<T>({
             });
           }}
         >
-          <HeaderComponent style={styles.header} />
+          <HeaderBackground style={styles.header} />
+          {HeaderContent && (
+            <Animated.View
+              style={[
+                headerContentAnimatedStyle,
+                styles.headerContentContainer,
+              ]}
+            >
+              <HeaderContent />
+            </Animated.View>
+          )}
+
           <Animated.Text
             onLayout={(event: LayoutChangeEvent) => {
               setHeaderTitleLayout(event.nativeEvent.layout);
@@ -97,7 +111,9 @@ export function AnimatedHeaderFlatList<T>({
     );
   }, [
     navigationBarHeight,
-    HeaderComponent,
+    HeaderBackground,
+    HeaderContent,
+    headerContentAnimatedStyle,
     headerTitleAnimatedStyle,
     titleStyle,
     title,
@@ -229,6 +245,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    zIndex: 0,
   },
   headerTitle: {
     position: 'absolute',
@@ -238,5 +255,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  headerContentContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

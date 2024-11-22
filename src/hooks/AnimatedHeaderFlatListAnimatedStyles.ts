@@ -27,6 +27,7 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
+  headerContentAnimatedStyle: AnimatedStyle<ViewStyle>;
 };
 
 export const useAnimatedHeaderFlatListAnimatedStyles =
@@ -94,7 +95,16 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
         opacity: stickyHeaderOpacity.value,
       };
     });
-
+    const headerContentAnimatedStyle = useAnimatedStyle(() => {
+      return {
+        opacity: interpolate(
+          scrollY.value,
+          [0, headerLayout.height - navigationBarHeight * 2],
+          [1, 0],
+          'clamp'
+        ),
+      };
+    });
     const scrollHandler = useAnimatedScrollHandler((event) => {
       scrollY.value = event.contentOffset.y;
       navigationTitleOpacity.value =
@@ -117,5 +127,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
       navigationTitleAnimatedStyle,
       headerTitleAnimatedStyle,
       stickyHeaderAnimatedStyle,
+      headerContentAnimatedStyle,
     };
   };
