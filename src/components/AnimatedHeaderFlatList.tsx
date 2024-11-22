@@ -40,7 +40,8 @@ export function AnimatedHeaderFlatList<T>({
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
     headerLayout,
-    headerTitleLayout,
+    setHeaderLayout,
+    setHeaderTitleLayout,
   } = useAnimatedHeaderFlatListAnimatedStyles();
 
   // Navigation Header
@@ -70,19 +71,16 @@ export function AnimatedHeaderFlatList<T>({
         <View
           style={[styles.headerContainer, { top: -navigationBarHeight }]}
           onLayout={(event: LayoutChangeEvent) => {
-            console.log('headerLayout', event.nativeEvent.layout);
-            headerLayout.value = {
-              x: event.nativeEvent.layout.x,
-              y: event.nativeEvent.layout.y,
-              width: event.nativeEvent.layout.width,
+            setHeaderLayout({
+              ...event.nativeEvent.layout,
               height: event.nativeEvent.layout.height + navigationBarHeight,
-            };
+            });
           }}
         >
           <HeaderComponent style={styles.header} />
           <Animated.Text
             onLayout={(event: LayoutChangeEvent) => {
-              headerTitleLayout.value = event.nativeEvent.layout;
+              setHeaderTitleLayout(event.nativeEvent.layout);
             }}
             style={[headerTitleAnimatedStyle, styles.headerTitle, titleStyle]}
           >
@@ -97,8 +95,8 @@ export function AnimatedHeaderFlatList<T>({
     headerTitleAnimatedStyle,
     titleStyle,
     title,
-    headerLayout,
-    headerTitleLayout,
+    setHeaderLayout,
+    setHeaderTitleLayout,
   ]);
 
   // List Item Renderer
@@ -119,7 +117,7 @@ export function AnimatedHeaderFlatList<T>({
                 stickyHeaderAnimatedStyle,
                 styles.stickyHeader,
                 {
-                  bottom: headerLayout.value.height - navigationBarHeight * 2,
+                  bottom: headerLayout.height - navigationBarHeight * 2,
                 },
               ]}
             >
@@ -137,7 +135,7 @@ export function AnimatedHeaderFlatList<T>({
       flatListProps,
       navigationBarHeight,
       stickyHeaderAnimatedStyle,
-      headerLayout.value.height,
+      headerLayout.height,
       ListHeaderComponent,
     ]
   );
@@ -154,7 +152,7 @@ export function AnimatedHeaderFlatList<T>({
           style={[
             styles.mainHeaderContainer,
             {
-              height: headerLayout.value.height - navigationBarHeight * 2,
+              height: headerLayout.height - navigationBarHeight * 2,
               transform: [{ translateY: navigationBarHeight }],
             },
           ]}

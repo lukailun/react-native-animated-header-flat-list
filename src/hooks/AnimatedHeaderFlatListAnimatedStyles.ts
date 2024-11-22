@@ -1,4 +1,5 @@
 import { useHeaderHeight } from '@react-navigation/elements';
+import { useState } from 'react';
 import {
   useWindowDimensions,
   type LayoutRectangle,
@@ -11,18 +12,18 @@ import {
   useSharedValue,
   type AnimatedStyle,
   type ScrollHandlerProcessed,
-  type SharedValue,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type AnimatedHeaderFlatListAnimatedStyles = {
   scrollHandler: ScrollHandlerProcessed<Record<string, unknown>>;
   navigationBarHeight: number;
-  paddingTop: number;
+  headerLayout: LayoutRectangle;
+  setHeaderLayout: (layout: LayoutRectangle) => void;
+  headerTitleLayout: LayoutRectangle;
+  setHeaderTitleLayout: (layout: LayoutRectangle) => void;
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
-  headerLayout: SharedValue<LayoutRectangle>;
-  headerTitleLayout: SharedValue<LayoutRectangle>;
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
 };
 
@@ -33,24 +34,24 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
 
     const navigationBarHeight = useHeaderHeight();
     const safeAreaInsets = useSafeAreaInsets();
-    const headerLayout = useSharedValue<LayoutRectangle>({
+    const [headerLayout, setHeaderLayout] = useState<LayoutRectangle>({
       x: 0,
       y: 0,
       width: 0,
       height: 0,
     });
-    const headerTitleLayout = useSharedValue<LayoutRectangle>({
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-    });
+    const [headerTitleLayout, setHeaderTitleLayout] = useState<LayoutRectangle>(
+      {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      }
+    );
     const distanceBetweenTitleAndNavigationBar =
-      (navigationBarHeight -
-        safeAreaInsets.top +
-        headerTitleLayout.value.height) /
+      (navigationBarHeight - safeAreaInsets.top + headerTitleLayout.height) /
         2 +
-      headerTitleLayout.value.y -
+      headerTitleLayout.y -
       navigationBarHeight;
     const navigationTitleOpacity = useSharedValue(0);
     const stickyHeaderOpacity = useSharedValue(0);
@@ -70,8 +71,8 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
               [
                 0,
                 windowWidth / 2 -
-                  headerTitleLayout.value.x -
-                  headerTitleLayout.value.width / 2,
+                  headerTitleLayout.x -
+                  headerTitleLayout.width / 2,
               ],
               'clamp'
             ),
@@ -90,30 +91,20 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
       navigationTitleOpacity.value =
         event.contentOffset.y >= distanceBetweenTitleAndNavigationBar ? 1 : 0;
       stickyHeaderOpacity.value =
-        event.contentOffset.y >=
-        headerLayout.value.height - navigationBarHeight * 2
+        event.contentOffset.y >= headerLayout.height - navigationBarHeight * 2
           ? 1
           : 0;
-      // navigationTitleOpacity.value =
-      //   event.contentOffset.y >=
-      //   (navigationBarHeight - safeAreaInsets.top + channelNameHeight.value) / 2 +
-      //     24
-      //     ? 1
-      //     : 0
-      // channelHeaderBottomOpacity.value =
-      //   event.contentOffset.y >= channelHeaderHeight.value - navigationBarHeight
-      //     ? 1
-      //     : 0
     });
 
     return {
       scrollHandler,
       navigationBarHeight,
-      paddingTop: navigationBarHeight + safeAreaInsets.top,
+      headerLayout,
+      setHeaderLayout,
+      headerTitleLayout,
+      setHeaderTitleLayout,
       navigationTitleAnimatedStyle,
       headerTitleAnimatedStyle,
       stickyHeaderAnimatedStyle,
-      headerLayout,
-      headerTitleLayout,
     };
   };
