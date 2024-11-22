@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 | `title` | string | Yes | The title text that will animate between header and navigation bar |
 | `titleStyle` | ViewStyle | No | Style object for the title text |
 | `HeaderComponent` | React.ComponentType | Yes | Component to be rendered as the header |
-| `StickyComponent` | React.ComponentType | No | Optional component that sticks below the navigation bar |
+| `StickyComponent` | React.ComponentType | No | Optional component that sticks below HeaderComponent |
 | `...FlatListProps` | FlatListProps | - | All standard FlatList props are supported |
 
 ## Contributing
