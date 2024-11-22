@@ -22,6 +22,8 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   setHeaderLayout: (layout: LayoutRectangle) => void;
   headerTitleLayout: LayoutRectangle;
   setHeaderTitleLayout: (layout: LayoutRectangle) => void;
+  stickyComponentLayout: LayoutRectangle;
+  setStickyComponentLayout: (layout: LayoutRectangle) => void;
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
@@ -48,6 +50,13 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
         height: 0,
       }
     );
+    const [stickyComponentLayout, setStickyComponentLayout] =
+      useState<LayoutRectangle>({
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      });
     const distanceBetweenTitleAndNavigationBar =
       (navigationBarHeight - safeAreaInsets.top + headerTitleLayout.height) /
         2 +
@@ -103,6 +112,8 @@ export const useAnimatedHeaderFlatListAnimatedStyles =
       setHeaderLayout,
       headerTitleLayout,
       setHeaderTitleLayout,
+      stickyComponentLayout,
+      setStickyComponentLayout,
       navigationTitleAnimatedStyle,
       headerTitleAnimatedStyle,
       stickyHeaderAnimatedStyle,

@@ -16,6 +16,7 @@ interface Props {
   title: string;
   titleStyle?: ViewStyle;
   HeaderComponent: React.ComponentType<any>;
+  StickyComponent?: React.ComponentType<any>;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -28,6 +29,7 @@ export function AnimatedHeaderFlatList<T>({
   title,
   titleStyle,
   HeaderComponent,
+  StickyComponent,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
   const navigation = useNavigation();
@@ -42,6 +44,8 @@ export function AnimatedHeaderFlatList<T>({
     headerLayout,
     setHeaderLayout,
     setHeaderTitleLayout,
+    stickyComponentLayout,
+    setStickyComponentLayout,
   } = useAnimatedHeaderFlatListAnimatedStyles();
 
   // Navigation Header
@@ -61,6 +65,8 @@ export function AnimatedHeaderFlatList<T>({
       headerShown: true,
       headerTransparent: true,
       headerTitle: navigationTitle,
+      headerTintColor: 'red',
+      headerTitleAlign: 'center',
     });
   }, [navigationTitle, navigation]);
 
@@ -108,7 +114,7 @@ export function AnimatedHeaderFlatList<T>({
             style={[
               styles.stickyHeaderContainer,
               {
-                height: navigationBarHeight,
+                height: navigationBarHeight + stickyComponentLayout.height,
               },
             ]}
           >
@@ -117,12 +123,25 @@ export function AnimatedHeaderFlatList<T>({
                 stickyHeaderAnimatedStyle,
                 styles.stickyHeader,
                 {
-                  bottom: headerLayout.height - navigationBarHeight * 2,
+                  bottom:
+                    headerLayout.height -
+                    navigationBarHeight * 2 +
+                    stickyComponentLayout.height,
                 },
               ]}
             >
               {ListHeaderComponent}
             </Animated.View>
+            {StickyComponent && (
+              <View
+                style={styles.stickyComponentContainer}
+                onLayout={(event: LayoutChangeEvent) => {
+                  setStickyComponentLayout(event.nativeEvent.layout);
+                }}
+              >
+                <StickyComponent />
+              </View>
+            )}
           </View>
         );
       }
@@ -134,9 +153,12 @@ export function AnimatedHeaderFlatList<T>({
     [
       flatListProps,
       navigationBarHeight,
+      stickyComponentLayout.height,
       stickyHeaderAnimatedStyle,
       headerLayout.height,
       ListHeaderComponent,
+      StickyComponent,
+      setStickyComponentLayout,
     ]
   );
 
@@ -210,5 +232,11 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     position: 'absolute',
+  },
+  stickyComponentContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
