@@ -70,6 +70,7 @@ export function AnimatedHeaderFlatList<T>({
         <View
           style={[styles.headerContainer, { top: -navigationBarHeight }]}
           onLayout={(event: LayoutChangeEvent) => {
+            console.log('headerLayout', event.nativeEvent.layout);
             headerLayout.value = {
               x: event.nativeEvent.layout.x,
               y: event.nativeEvent.layout.y,

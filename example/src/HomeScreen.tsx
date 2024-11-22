@@ -1,4 +1,5 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { useCallback } from 'react';
+import { ImageBackground, StyleSheet, Text } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
@@ -7,29 +8,29 @@ export default function HomeScreen() {
   const backgroundImageUrl =
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
 
-  const header = () => (
-    <ImageBackground
-      source={{ uri: backgroundImageUrl }}
-      style={styles.header}
-    />
+  const header = useCallback(
+    () => (
+      <ImageBackground
+        source={{ uri: backgroundImageUrl }}
+        style={styles.header}
+      />
+    ),
+    [backgroundImageUrl]
   );
 
   return (
-    <View>
-      <AnimatedHeaderFlatList
-        title={title}
-        titleStyle={styles.headerTitle}
-        HeaderComponent={header}
-        data={data}
-        renderItem={({ item }) => <Text>{item}</Text>}
-      />
-    </View>
+    <AnimatedHeaderFlatList
+      title={title}
+      titleStyle={styles.headerTitle}
+      HeaderComponent={header}
+      data={data}
+      renderItem={({ item }) => <Text>{item}</Text>}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: 'white',
     height: 250,
   },
   headerTitle: {
