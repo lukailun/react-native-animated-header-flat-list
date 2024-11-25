@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { useCallback } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const data = Array.from({ length: 100 }, (_, index) => index.toString());
   const title = 'Animated Title';
   const imageUrl =
@@ -30,6 +32,7 @@ export default function HomeScreen() {
 
   return (
     <AnimatedHeaderFlatList
+      navigation={navigation}
       title={title}
       titleStyle={styles.headerTitle}
       HeaderBackground={HeaderBackground}

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -7,12 +8,21 @@ import {
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
+import {
+  type NavigationProp,
+  type NavigationState,
+} from '@react-navigation/native';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/AnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
 
 // Types
 interface Props {
+  navigation: Omit<
+    NavigationProp<ReactNavigation.RootParamList>,
+    'getState'
+  > & {
+    getState(): NavigationState | undefined;
+  };
   title: string;
   titleStyle?: ViewStyle;
   HeaderBackground: React.ComponentType<any>;
@@ -27,6 +37,7 @@ type AnimatedHeaderFlatListProps<T> = Omit<
   Props;
 
 export function AnimatedHeaderFlatList<T>({
+  navigation,
   title,
   titleStyle,
   HeaderBackground,
@@ -34,8 +45,6 @@ export function AnimatedHeaderFlatList<T>({
   StickyComponent,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
-  const navigation = useNavigation();
-
   // Hooks
   const {
     scrollHandler,
@@ -68,7 +77,6 @@ export function AnimatedHeaderFlatList<T>({
       headerShown: true,
       headerTransparent: true,
       headerTitle: navigationTitle,
-      headerTintColor: 'red',
       headerTitleAlign: 'center',
     });
   }, [navigationTitle, navigation]);

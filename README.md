@@ -30,11 +30,13 @@ npm install react-native-animated-header-flat-list
 ## Usage
 
 ```tsx
+import { useNavigation } from '@react-navigation/native';
 import { useCallback } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const data = Array.from({ length: 100 }, (_, index) => index.toString());
   const title = 'Animated Title';
   const imageUrl =
@@ -62,6 +64,7 @@ export default function HomeScreen() {
 
   return (
     <AnimatedHeaderFlatList
+      navigation={navigation}
       title={title}
       titleStyle={styles.headerTitle}
       HeaderBackground={HeaderBackground}
@@ -99,6 +102,7 @@ const styles = StyleSheet.create({
 
 | Prop               | Type                | Required | Description                                                                                                               |
 | ------------------ | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `navigation`       | NavigationProp      | Yes      | Navigation prop from React Navigation                                                                                     |
 | `title`            | string              | Yes      | The title text that will animate between header and navigation bar                                                        |
 | `titleStyle`       | ViewStyle           | No       | Style object for the title text                                                                                           |
 | `HeaderBackground` | React.ComponentType | Yes      | Component to be rendered as the header background                                                                         |
