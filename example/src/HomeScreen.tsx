@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const data = Array.from({ length: 100 }, (_, index) => index.toString());
   const title = 'Animated Title';
   const imageUrl =
@@ -34,7 +35,8 @@ export default function HomeScreen() {
     <AnimatedHeaderFlatList
       navigation={navigation}
       title={title}
-      titleStyle={styles.headerTitle}
+      headerTitleStyle={styles.headerTitle}
+      navigationTitleStyle={styles.navigationTitle}
       HeaderBackground={HeaderBackground}
       HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
@@ -56,6 +58,11 @@ const styles = StyleSheet.create({
     top: 150,
     left: 10,
     fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  navigationTitle: {
+    fontSize: 17,
     fontWeight: 'bold',
     color: 'white',
   },

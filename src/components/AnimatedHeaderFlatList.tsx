@@ -4,27 +4,20 @@ import {
   View,
   type LayoutChangeEvent,
   type ListRenderItemInfo,
-  type ViewStyle,
+  type TextStyle,
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
-import {
-  type NavigationProp,
-  type NavigationState,
-} from '@react-navigation/native';
+import { type NavigationProp } from '@react-navigation/native';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/AnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
 
 // Types
 interface Props {
-  navigation: Omit<
-    NavigationProp<ReactNavigation.RootParamList>,
-    'getState'
-  > & {
-    getState(): NavigationState | undefined;
-  };
+  navigation: NavigationProp<any>;
   title: string;
-  titleStyle?: ViewStyle;
+  headerTitleStyle?: TextStyle;
+  navigationTitleStyle?: TextStyle;
   HeaderBackground: React.ComponentType<any>;
   HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
@@ -39,7 +32,8 @@ type AnimatedHeaderFlatListProps<T> = Omit<
 export function AnimatedHeaderFlatList<T>({
   navigation,
   title,
-  titleStyle,
+  headerTitleStyle,
+  navigationTitleStyle,
   HeaderBackground,
   HeaderContent,
   StickyComponent,
@@ -58,18 +52,25 @@ export function AnimatedHeaderFlatList<T>({
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
-  } = useAnimatedHeaderFlatListAnimatedStyles();
+  } = useAnimatedHeaderFlatListAnimatedStyles({
+    headerTitleStyle,
+    navigationTitleStyle,
+  });
 
   // Navigation Header
   const navigationTitle = useCallback(
     () => (
       <Animated.Text
-        style={[navigationTitleAnimatedStyle, titleStyle, styles.titleStyle]}
+        style={[
+          navigationTitleAnimatedStyle,
+          navigationTitleStyle,
+          styles.titleStyle,
+        ]}
       >
         {title}
       </Animated.Text>
     ),
-    [navigationTitleAnimatedStyle, titleStyle, title]
+    [navigationTitleAnimatedStyle, navigationTitleStyle, title]
   );
 
   useLayoutEffect(() => {
@@ -110,7 +111,11 @@ export function AnimatedHeaderFlatList<T>({
             onLayout={(event: LayoutChangeEvent) => {
               setHeaderTitleLayout(event.nativeEvent.layout);
             }}
-            style={[headerTitleAnimatedStyle, styles.headerTitle, titleStyle]}
+            style={[
+              headerTitleAnimatedStyle,
+              styles.headerTitle,
+              headerTitleStyle,
+            ]}
           >
             {title}
           </Animated.Text>
@@ -123,7 +128,7 @@ export function AnimatedHeaderFlatList<T>({
     HeaderContent,
     headerContentAnimatedStyle,
     headerTitleAnimatedStyle,
-    titleStyle,
+    headerTitleStyle,
     title,
     setHeaderLayout,
     setHeaderTitleLayout,

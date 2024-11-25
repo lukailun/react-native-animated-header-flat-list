@@ -66,7 +66,8 @@ export default function HomeScreen() {
     <AnimatedHeaderFlatList
       navigation={navigation}
       title={title}
-      titleStyle={styles.headerTitle}
+      headerTitleStyle={styles.headerTitle}
+      navigationTitleStyle={styles.navigationTitle}
       HeaderBackground={HeaderBackground}
       HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
@@ -91,6 +92,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  navigationTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   stickyComponent: {
     backgroundColor: 'white',
     padding: 10,
@@ -100,15 +106,16 @@ const styles = StyleSheet.create({
 
 ### Props
 
-| Prop               | Type                | Required | Description                                                                                                               |
-| ------------------ | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `navigation`       | NavigationProp      | Yes      | Navigation prop from React Navigation                                                                                     |
-| `title`            | string              | Yes      | The title text that will animate between header and navigation bar                                                        |
-| `titleStyle`       | ViewStyle           | No       | Style object for the title text                                                                                           |
-| `HeaderBackground` | React.ComponentType | Yes      | Component to be rendered as the header background                                                                         |
-| `HeaderContent`    | React.ComponentType | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
-| `StickyComponent`  | React.ComponentType | No       | Optional component that sticks below the navigation bar                                                                   |
-| `...FlatListProps` | FlatListProps       | -        | All standard FlatList props are supported                                                                                 |
+| Prop                 | Type               | Required | Description                                                                                                               |
+| ------------------- | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `navigation`        | NavigationProp<any> | Yes      | React Navigation navigation prop                                                                                          |
+| `title`             | string              | Yes      | The title text that will animate between header and navigation bar                                                        |
+| `headerTitleStyle`  | TextStyle           | No       | Style object for the title text in the header                                                                             |
+| `navigationTitleStyle` | TextStyle        | No       | Style object for the title text in the navigation bar                                                                     |
+| `HeaderBackground`  | React.ComponentType | Yes      | Component to be rendered as the header background                                                                         |
+| `HeaderContent`     | React.ComponentType | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
+| `StickyComponent`   | React.ComponentType | No       | Optional component that sticks below the navigation bar                                                                   |
+| `...FlatListProps`  | FlatListProps       | -        | All standard FlatList props are supported                                                                                 |
 
 ## Contributing
 
