@@ -27,6 +27,31 @@ A React Native FlatList component with an animated collapsible header, featuring
 npm install react-native-animated-header-flat-list
 ```
 
+## Required Peer Dependencies
+
+This library requires the following peer dependencies to be installed in your project:
+
+```sh
+npm install @react-navigation/native @react-navigation/native-stack @react-navigation/elements react-native-reanimated react-native-safe-area-context
+```
+
+Make sure to follow the installation instructions for each dependency:
+
+- [React Navigation](https://reactnavigation.org/docs/getting-started)
+- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation)
+- [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
+
+### Additional Setup
+
+For React Native Reanimated, add this to your `babel.config.js`:
+```js
+module.exports = {
+  plugins: [
+    'react-native-reanimated/plugin',
+  ],
+};
+```
+
 ## Usage
 
 ```tsx
