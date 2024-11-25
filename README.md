@@ -38,7 +38,7 @@ npm install @react-navigation/native @react-navigation/native-stack @react-navig
 Make sure to follow the installation instructions for each dependency:
 
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
-- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation)
+- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
 ### Additional Setup
