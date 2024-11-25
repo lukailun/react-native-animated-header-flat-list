@@ -10,13 +10,20 @@ const globals = {
 
 module.exports = [
   {
+    files: ['**/*.{js,jsx,ts,tsx}'],  
     ignores: ['node_modules/', 'lib/'],
     plugins: {
       prettier
     },
     languageOptions: {
       globals,
-      parserOptions: reactNative.parserOptions
+      parserOptions: {
+        ...reactNative.parserOptions,
+        ecmaFeatures: {
+          jsx: true
+        },
+        sourceType: 'module'
+      }
     },
     rules: {
       ...reactNative.rules,
