@@ -6,11 +6,12 @@ import {
   type ListRenderItemInfo,
   type StyleProp,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import { type NavigationProp } from '@react-navigation/native';
-import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/AnimatedHeaderFlatListAnimatedStyles';
+import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
 
 // Types
@@ -22,6 +23,7 @@ interface Props {
   HeaderBackground: React.ComponentType<any>;
   HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
+  style?: StyleProp<ViewStyle>;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -38,27 +40,30 @@ export function AnimatedHeaderFlatList<T>({
   HeaderBackground,
   HeaderContent,
   StickyComponent,
+  style,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
-  const getFontSizeFromStyle = useCallback((style: StyleProp<TextStyle>) => {
-    if (!style) return undefined;
-    if (Array.isArray(style)) {
-      for (const styleItem of style) {
-        if (
-          styleItem &&
-          typeof styleItem === 'object' &&
-          'fontSize' in styleItem
-        ) {
-          return styleItem.fontSize;
+  const getFontSizeFromStyle = useCallback(
+    (textStyle: StyleProp<TextStyle>) => {
+      if (!textStyle) return undefined;
+      if (Array.isArray(textStyle)) {
+        for (const styleItem of textStyle) {
+          if (
+            styleItem &&
+            typeof styleItem === 'object' &&
+            'fontSize' in styleItem
+          ) {
+            return styleItem.fontSize;
+          }
         }
+      } else if (typeof textStyle === 'object' && 'fontSize' in textStyle) {
+        return textStyle.fontSize;
       }
-    } else if (typeof style === 'object' && 'fontSize' in style) {
-      return style.fontSize;
-    }
-    return undefined;
-  }, []);
+      return undefined;
+    },
+    []
+  );
 
-  // Hooks
   const {
     scrollHandler,
     navigationBarHeight,
@@ -71,12 +76,12 @@ export function AnimatedHeaderFlatList<T>({
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
+    headerBackgroundAnimatedStyle,
   } = useAnimatedHeaderFlatListAnimatedStyles({
     headerTitleFontSize: getFontSizeFromStyle(headerTitleStyle),
     navigationTitleFontSize: getFontSizeFromStyle(navigationTitleStyle),
   });
 
-  // Navigation Header
   const navigationTitle = useCallback(
     () => (
       <Animated.Text
@@ -102,7 +107,6 @@ export function AnimatedHeaderFlatList<T>({
     });
   }, [navigationTitle, navigation]);
 
-  // Header Component
   const ListHeaderComponent = useMemo(() => {
     return (
       <View style={styles.headerWrapper}>
@@ -155,7 +159,6 @@ export function AnimatedHeaderFlatList<T>({
     setHeaderTitleLayout,
   ]);
 
-  // List Item Renderer
   const renderItem = useCallback(
     ({ item }: { item: 'HEADER' | T }) => {
       if (item === 'HEADER') {
@@ -212,25 +215,24 @@ export function AnimatedHeaderFlatList<T>({
     ]
   );
 
-  // Main Render
   return (
     <Animated.FlatList
       {...flatListProps}
-      style={styles.flatList}
+      style={[styles.flatList, style]}
       stickyHeaderHiddenOnScroll={false}
       stickyHeaderIndices={[1]}
       ListHeaderComponent={
-        <View
+        <Animated.View
           style={[
+            headerBackgroundAnimatedStyle,
             styles.mainHeaderContainer,
             {
               height: headerLayout.height - navigationBarHeight * 2,
-              transform: [{ translateY: navigationBarHeight }],
             },
           ]}
         >
           {ListHeaderComponent}
-        </View>
+        </Animated.View>
       }
       onScroll={scrollHandler}
       data={[

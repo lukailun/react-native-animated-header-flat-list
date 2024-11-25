@@ -33,6 +33,7 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerContentAnimatedStyle: AnimatedStyle<ViewStyle>;
+  headerBackgroundAnimatedStyle: AnimatedStyle<ViewStyle>;
 };
 
 export const useAnimatedHeaderFlatListAnimatedStyles = ({
@@ -41,7 +42,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
 }: AnimatedHeaderFlatListAnimatedStylesProps): AnimatedHeaderFlatListAnimatedStyles => {
   const { width: windowWidth } = useWindowDimensions();
   const scrollY = useSharedValue(0);
-
   const navigationBarHeight = useHeaderHeight();
   const safeAreaInsets = useSafeAreaInsets();
   const [headerLayout, setHeaderLayout] = useState<LayoutRectangle>({
@@ -69,6 +69,8 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     navigationBarHeight;
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
+  const headerScale = useSharedValue(1);
+  const headerTranslateY = useSharedValue(navigationBarHeight);
   const navigationTitleAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: navigationTitleOpacity.value,
@@ -122,8 +124,34 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       ),
     };
   });
+  const headerBackgroundAnimatedStyle = useAnimatedStyle(() => {
+    if (scrollY.value >= 0) {
+      return { transform: [{ translateY: headerTranslateY.value }] };
+    }
+    return {
+      transform: [
+        {
+          scale: headerScale.value,
+        },
+        {
+          translateY: headerTranslateY.value,
+        },
+      ],
+    };
+  });
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
+    headerScale.value =
+      scrollY.value < 0
+        ? 1 - scrollY.value / (headerLayout.height - navigationBarHeight)
+        : 1;
+    headerTranslateY.value =
+      scrollY.value < 0
+        ? navigationBarHeight +
+          ((headerLayout.height - navigationBarHeight) *
+            (1 - headerScale.value)) /
+            2
+        : navigationBarHeight;
     navigationTitleOpacity.value =
       event.contentOffset.y >= distanceBetweenTitleAndNavigationBar ? 1 : 0;
     stickyHeaderOpacity.value =
@@ -145,5 +173,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
+    headerBackgroundAnimatedStyle,
   };
 };
