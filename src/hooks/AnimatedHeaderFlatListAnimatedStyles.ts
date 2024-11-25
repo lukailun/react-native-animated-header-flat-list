@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {
   useWindowDimensions,
   type LayoutRectangle,
+  type StyleProp,
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
@@ -17,8 +18,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type AnimatedHeaderFlatListAnimatedStylesProps = {
-  headerTitleStyle?: TextStyle;
-  navigationTitleStyle?: TextStyle;
+  headerTitleStyle?: StyleProp<TextStyle>;
+  navigationTitleStyle?: StyleProp<TextStyle>;
 };
 
 type AnimatedHeaderFlatListAnimatedStyles = {
@@ -98,8 +99,14 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
             [0, distanceBetweenTitleAndNavigationBar],
             [
               1,
-              navigationTitleStyle?.fontSize && headerTitleStyle?.fontSize
-                ? navigationTitleStyle?.fontSize / headerTitleStyle?.fontSize
+              typeof navigationTitleStyle === 'object' &&
+              navigationTitleStyle !== null &&
+              typeof headerTitleStyle === 'object' &&
+              headerTitleStyle !== null &&
+              'fontSize' in navigationTitleStyle &&
+              'fontSize' in headerTitleStyle
+                ? (navigationTitleStyle.fontSize as number) /
+                  (headerTitleStyle.fontSize as number)
                 : 1,
             ],
             'clamp'

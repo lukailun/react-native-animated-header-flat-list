@@ -4,6 +4,7 @@ import {
   View,
   type LayoutChangeEvent,
   type ListRenderItemInfo,
+  type StyleProp,
   type TextStyle,
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
@@ -16,8 +17,8 @@ import Animated from 'react-native-reanimated';
 interface Props {
   navigation: NavigationProp<any>;
   title: string;
-  headerTitleStyle?: TextStyle;
-  navigationTitleStyle?: TextStyle;
+  headerTitleStyle?: StyleProp<TextStyle>;
+  navigationTitleStyle?: StyleProp<TextStyle>;
   HeaderBackground: React.ComponentType<any>;
   HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
