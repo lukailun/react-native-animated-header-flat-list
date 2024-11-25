@@ -40,6 +40,24 @@ export function AnimatedHeaderFlatList<T>({
   StickyComponent,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
+  const getFontSizeFromStyle = useCallback((style: StyleProp<TextStyle>) => {
+    if (!style) return undefined;
+    if (Array.isArray(style)) {
+      for (const styleItem of style) {
+        if (
+          styleItem &&
+          typeof styleItem === 'object' &&
+          'fontSize' in styleItem
+        ) {
+          return styleItem.fontSize;
+        }
+      }
+    } else if (typeof style === 'object' && 'fontSize' in style) {
+      return style.fontSize;
+    }
+    return undefined;
+  }, []);
+
   // Hooks
   const {
     scrollHandler,
@@ -54,8 +72,8 @@ export function AnimatedHeaderFlatList<T>({
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
   } = useAnimatedHeaderFlatListAnimatedStyles({
-    headerTitleStyle,
-    navigationTitleStyle,
+    headerTitleFontSize: getFontSizeFromStyle(headerTitleStyle),
+    navigationTitleFontSize: getFontSizeFromStyle(navigationTitleStyle),
   });
 
   // Navigation Header
