@@ -85,6 +85,7 @@ export function AnimatedHeaderFlatList<T>({
           navigationTitleStyle,
           styles.titleStyle,
         ]}
+        numberOfLines={1}
       >
         {title}
       </Animated.Text>
@@ -130,6 +131,7 @@ export function AnimatedHeaderFlatList<T>({
             onLayout={(event: LayoutChangeEvent) => {
               setHeaderTitleLayout(event.nativeEvent.layout);
             }}
+            numberOfLines={1}
             style={[
               headerTitleAnimatedStyle,
               styles.headerTitle,
