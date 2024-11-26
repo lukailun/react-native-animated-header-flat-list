@@ -6,7 +6,6 @@ import {
   type ListRenderItemInfo,
   type StyleProp,
   type TextStyle,
-  type ViewStyle,
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
@@ -14,7 +13,6 @@ import { type NavigationProp } from '@react-navigation/native';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
 
-// Types
 interface Props {
   navigation: NavigationProp<any>;
   title: string;
@@ -23,7 +21,6 @@ interface Props {
   HeaderBackground: React.ComponentType<any>;
   HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
-  style?: StyleProp<ViewStyle>;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -40,7 +37,6 @@ export function AnimatedHeaderFlatList<T>({
   HeaderBackground,
   HeaderContent,
   StickyComponent,
-  style,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
   const getFontSizeFromStyle = useCallback(
@@ -85,11 +81,7 @@ export function AnimatedHeaderFlatList<T>({
   const navigationTitle = useCallback(
     () => (
       <Animated.Text
-        style={[
-          navigationTitleAnimatedStyle,
-          navigationTitleStyle,
-          styles.titleStyle,
-        ]}
+        style={[navigationTitleAnimatedStyle, navigationTitleStyle]}
         numberOfLines={1}
       >
         {title}
@@ -224,7 +216,6 @@ export function AnimatedHeaderFlatList<T>({
   return (
     <Animated.FlatList
       {...flatListProps}
-      style={style}
       stickyHeaderHiddenOnScroll={false}
       stickyHeaderIndices={[1]}
       ListHeaderComponent={
@@ -254,20 +245,14 @@ const styles = StyleSheet.create({
   navigationBar: {
     backgroundColor: 'transparent',
   },
-  titleStyle: {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
   headerWrapper: {
     overflow: 'visible',
   },
   headerContainer: {
+    position: 'absolute',
     left: 0,
     right: 0,
     overflow: 'visible',
-    position: 'absolute',
   },
   stickyHeaderContainer: {
     overflow: 'scroll',
