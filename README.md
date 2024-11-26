@@ -56,34 +56,58 @@ module.exports = {
 
 ```tsx
 import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
-  const data = Array.from({ length: 100 }, (_, index) => index.toString());
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const data = Array.from({ length: 50 }, (_, index) => ({
+    id: `item-${index}`,
+    title: `Item ${index + 1}`,
+    description: 'Lorem ipsum dolor sit amet',
+  }));
   const title = 'Animated Title';
-  const imageUrl =
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb';
+  const backgroundImageUrl =
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
+  const avatarUrl = 'https://api.dicebear.com/7.x/avataaars/png?seed=John';
 
   const HeaderBackground = useCallback(
-    () => <View style={styles.headerBackground} />,
-    []
+    () => (
+      <ImageBackground
+        source={{ uri: backgroundImageUrl }}
+        style={styles.headerBackground}
+      />
+    ),
+    [backgroundImageUrl]
   );
 
   const HeaderContent = useCallback(
     () => (
-      <ImageBackground
-        source={{ uri: imageUrl }}
-        style={styles.headerContent}
-      />
+      <View style={styles.headerContent}>
+        <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+      </View>
     ),
-    [imageUrl]
+    [avatarUrl]
   );
 
   const StickyComponent = useCallback(
     () => <Text style={styles.stickyComponent}>Sticky Item</Text>,
+    []
+  );
+
+  const renderItem = useCallback(
+    ({
+      item,
+    }: {
+      item: { id: string; title: string; description: string };
+    }) => (
+      <View style={styles.listItem}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+    ),
     []
   );
 
@@ -97,34 +121,65 @@ export default function HomeScreen() {
       HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
       data={data}
-      renderItem={({ item }) => <Text>{item}</Text>}
+      renderItem={renderItem}
     />
   );
 }
 
 const styles = StyleSheet.create({
   headerBackground: {
-    height: 250,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
+    height: 300,
+    width: '100%',
   },
   headerContent: {
-    height: 250,
+    height: 300,
+    width: '100%',
+  },
+  avatar: {
+    position: 'absolute',
+    top: 80,
+    left: 10,
+    backgroundColor: 'white',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderWidth: 2,
+    borderColor: 'white',
   },
   headerTitle: {
-    top: 150,
+    position: 'absolute',
+    top: 200,
     left: 10,
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
   },
   navigationTitle: {
-    fontSize: 17,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '600',
     color: 'white',
   },
   stickyComponent: {
     backgroundColor: 'white',
-    padding: 10,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+  },
+  listItem: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+    backgroundColor: 'white',
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  itemDescription: {
+    fontSize: 14,
+    color: '#666666',
+    marginTop: 4,
   },
 });
 ```

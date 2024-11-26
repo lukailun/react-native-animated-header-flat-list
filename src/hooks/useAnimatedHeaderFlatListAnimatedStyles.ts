@@ -69,8 +69,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     navigationBarHeight;
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
-  const headerScale = useSharedValue(1);
-  const headerTranslateY = useSharedValue(navigationBarHeight);
   const navigationTitleAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: navigationTitleOpacity.value,
@@ -126,32 +124,35 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
   });
   const headerBackgroundAnimatedStyle = useAnimatedStyle(() => {
     if (scrollY.value >= 0) {
-      return { transform: [{ translateY: headerTranslateY.value }] };
+      return {};
     }
     return {
       transform: [
         {
-          scale: headerScale.value,
+          translateY: interpolate(
+            scrollY.value,
+            [scrollY.value, 0],
+            [scrollY.value / 2, 0],
+            'clamp'
+          ),
         },
         {
-          translateY: headerTranslateY.value,
+          scale: interpolate(
+            scrollY.value,
+            [scrollY.value, 0],
+            [
+              1 - scrollY.value / (headerLayout.height - navigationBarHeight),
+              1,
+              1,
+            ],
+            'clamp'
+          ),
         },
       ],
     };
   });
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
-    headerScale.value =
-      scrollY.value < 0
-        ? 1 - scrollY.value / (headerLayout.height - navigationBarHeight)
-        : 1;
-    headerTranslateY.value =
-      scrollY.value < 0
-        ? navigationBarHeight +
-          ((headerLayout.height - navigationBarHeight) *
-            (1 - headerScale.value)) /
-            2
-        : navigationBarHeight;
     navigationTitleOpacity.value =
       event.contentOffset.y >= distanceBetweenTitleAndNavigationBar ? 1 : 0;
     stickyHeaderOpacity.value =

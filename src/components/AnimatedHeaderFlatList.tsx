@@ -119,7 +119,10 @@ export function AnimatedHeaderFlatList<T>({
             });
           }}
         >
-          <HeaderBackground style={styles.header} />
+          <Animated.View style={headerBackgroundAnimatedStyle}>
+            <HeaderBackground />
+          </Animated.View>
+
           {HeaderContent && (
             <Animated.View
               style={[
@@ -149,6 +152,7 @@ export function AnimatedHeaderFlatList<T>({
     );
   }, [
     navigationBarHeight,
+    headerBackgroundAnimatedStyle,
     HeaderBackground,
     HeaderContent,
     headerContentAnimatedStyle,
@@ -224,10 +228,10 @@ export function AnimatedHeaderFlatList<T>({
       ListHeaderComponent={
         <Animated.View
           style={[
-            headerBackgroundAnimatedStyle,
             styles.mainHeaderContainer,
             {
               height: headerLayout.height - navigationBarHeight * 2,
+              transform: [{ translateY: navigationBarHeight }],
             },
           ]}
         >
@@ -257,7 +261,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     left: 0,
     right: 0,
-    overflow: 'hidden',
+    overflow: 'visible',
     position: 'absolute',
   },
   stickyHeaderContainer: {
@@ -273,15 +277,6 @@ const styles = StyleSheet.create({
   },
   mainHeaderContainer: {
     overflow: 'visible',
-  },
-  header: {
-    position: 'absolute',
-    overflow: 'hidden',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 0,
   },
   headerTitle: {
     position: 'absolute',
