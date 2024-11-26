@@ -6,11 +6,11 @@ A React Native FlatList component with an animated collapsible header, featuring
 
 ### iOS
 
-![iOS](./assets/iOS.mp4)
+![iOS](./assets/iOS.gif)
 
 ### Android
 
-![Android](./assets/Android.mp4)
+![Android](./assets/Android.gif)
 
 ## Features
 
