@@ -18,8 +18,8 @@
       <td><h4 align='center'>Android</h4></td>
     </tr>
     <tr>
-      <td><img width="250" height="541" src="./assets/iOS.gif" alt="iOS"></td>
-      <td><img width="263" height="541" src="./assets/Android.gif" alt="Android"></td>
+      <td><img width="296" height="640" src="./assets/iOS.gif" alt="iOS"></td>
+      <td><img width="311" height="640" src="./assets/Android.gif" alt="Android"></td>
     </tr>
   </table>
 </div>
