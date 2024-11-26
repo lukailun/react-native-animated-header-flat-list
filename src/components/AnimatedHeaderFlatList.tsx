@@ -101,6 +101,8 @@ export function AnimatedHeaderFlatList<T>({
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
+      headerStyle: styles.navigationBar,
+      headerShadowVisible: false,
       headerTransparent: true,
       headerTitle: navigationTitle,
       headerTitleAlign: 'center',
@@ -222,7 +224,7 @@ export function AnimatedHeaderFlatList<T>({
   return (
     <Animated.FlatList
       {...flatListProps}
-      style={[styles.flatList, style]}
+      style={style}
       stickyHeaderHiddenOnScroll={false}
       stickyHeaderIndices={[1]}
       ListHeaderComponent={
@@ -249,6 +251,9 @@ export function AnimatedHeaderFlatList<T>({
 }
 
 const styles = StyleSheet.create({
+  navigationBar: {
+    backgroundColor: 'transparent',
+  },
   titleStyle: {
     left: 0,
     right: 0,
@@ -271,9 +276,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-  },
-  flatList: {
-    overflow: 'scroll',
   },
   mainHeaderContainer: {
     overflow: 'visible',
