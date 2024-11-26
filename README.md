@@ -1,5 +1,10 @@
 # react-native-animated-header-flat-list
 
+[![Reanimated v2 version](https://img.shields.io/github/package-json/v/alantoa/react-native-reanimated-player/master?label=Reanimated%20v2&style=flat-square)](https://www.npmjs.com/package/react-native-animated-header-flat-list) 
+[![npm](https://img.shields.io/npm/l/react-native-reanimated-player?style=flat-square)](https://www.npmjs.com/package/react-native-animated-header-flat-list) 
+[![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/react-native-animated-header-flat-list) 
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
+
 A React Native FlatList component with an animated collapsible header, featuring parallax image effects, blur overlay, and smooth title transitions. Perfect for social media feeds, profiles, and content-rich screens.
 
 ## Preview
