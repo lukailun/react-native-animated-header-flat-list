@@ -195,6 +195,5 @@
     "languages": "js",
     "type": "library",
     "version": "0.44.2"
-  },
-  "type": "module"
+  }
 }
