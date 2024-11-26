@@ -4,13 +4,18 @@ A React Native FlatList component with an animated collapsible header, featuring
 
 ## Preview
 
-### iOS
-
-![iOS](./assets/iOS.gif)
-
-### Android
-
-![Android](./assets/Android.gif)
+<div align="center">
+  <table style='width:100%;'>
+    <tr>
+      <td><h4 align='center'>iOS</h4></td>
+      <td><h4 align='center'>Android</h4></td>
+    </tr>
+    <tr>
+      <td><img width="250" height="541" src="./assets/iOS.gif" alt="iOS"></td>
+      <td><img width="250" height="514" src="./assets/Android.gif" alt="Android"></td>
+    </tr>
+  </table>
+</div>
 
 ## Features
 
