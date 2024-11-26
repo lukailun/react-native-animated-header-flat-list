@@ -16,10 +16,12 @@ English | [简体中文](./README_zh.md)
     <tr>
       <td><h4 align='center'>iOS</h4></td>
       <td><h4 align='center'>Android</h4></td>
+      <td><h4 align='center'>Web</h4></td>
     </tr>
     <tr>
       <td><img width="296" height="640" src="./assets/iOS.gif" alt="iOS"></td>
       <td><img width="311" height="640" src="./assets/Android.gif" alt="Android"></td>
+      <td><img width="296" height="640" src="./assets/Web.gif" alt="Web"></td>
     </tr>
   </table>
 </div>
