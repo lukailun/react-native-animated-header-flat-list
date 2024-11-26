@@ -5,11 +5,11 @@
 [![npm](https://img.shields.io/npm/types/react-native-animated-header-flat-list?style=flat-square)](https://www.npmjs.com/package/react-native-animated-header-flat-list) 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.dev/)
 
-A React Native FlatList component with an animated collapsible header, featuring parallax effects, smooth title transitions, sticky component support, and customizable styles. Built with TypeScript and separate background/content layers in header.
+一个带有动画折叠头部的 React Native FlatList 组件，具有视差效果、平滑标题过渡、粘性组件支持和可自定义样式。使用 TypeScript 构建，并在 Header 中实现了背景层和内容层的分离。
 
-English | [简体中文](./README_zh.md)
+[English](./README.md) | 简体中文
 
-## Preview
+## 预览
 
 <div align="center">
   <table style='width:100%;'>
@@ -24,38 +24,38 @@ English | [简体中文](./README_zh.md)
   </table>
 </div>
 
-## Features
+## 特性
 
-- Animated collapsible header with parallax effect
-- Smooth title transition from header to navigation bar
-- Optional sticky component support
-- Fully customizable header and title styles
-- Separate background and content layers in header
-- TypeScript support
+- 带有视差效果的动画折叠头部
+- 标题从 Header 到 NavigationBar 的平滑过渡
+- 可选的粘性组件支持
+- 完全可自定义的头部和标题样式
+- Header 中背景层和内容层的分离
+- TypeScript 支持
 
-## Installation
+## 安装
 
 ```sh
 npm install react-native-animated-header-flat-list
 ```
 
-## Required Peer Dependencies
+## 必需的依赖
 
-This library requires the following peer dependencies to be installed in your project:
+本库需要安装以下依赖项：
 
 ```sh
 npm install @react-navigation/native @react-navigation/native-stack @react-navigation/elements react-native-reanimated react-native-safe-area-context
 ```
 
-Make sure to follow the installation instructions for each dependency:
+请确保按照每个依赖的安装说明进行操作：
 
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
-### Additional Setup
+### 额外配置
 
-For React Native Reanimated, add this to your `babel.config.js`:
+对于 React Native Reanimated，需要在 `babel.config.js` 中添加：
 ```js
 module.exports = {
   plugins: [
@@ -64,7 +64,7 @@ module.exports = {
 };
 ```
 
-## Usage
+## 使用示例
 
 ```tsx
 import { useNavigation } from '@react-navigation/native';
@@ -196,27 +196,27 @@ const styles = StyleSheet.create({
 });
 ```
 
-### Props
+### 属性
 
-| Prop                   | Type                 | Required | Description                                                                                                               |
-| -------------------    | -------------------  | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `navigation`           | NavigationProp<any>  | Yes      | React Navigation navigation prop                                                                                          |
-| `title`                | string               | Yes      | The title text that will animate between header and navigation bar                                                        |
-| `headerTitleStyle`     | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container         |
-| `navigationTitleStyle` | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties        |
-| `HeaderBackground`     | React.ComponentType  | Yes      | Component to be rendered as the header background                                                                         |
-| `HeaderContent`        | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
-| `StickyComponent`      | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                                   |
-| `...FlatListProps`     | FlatListProps        | -        | All standard FlatList props are supported                                                                                 |
+| 属性                    | 类型                 | 是否必需 | 描述                                                                 |
+| -------------------    | -------------------  | -------- | ------------------------------------------------------------------ |
+| `navigation`           | NavigationProp<any>  | 是       | React Navigation 导航属性                                           |
+| `title`                | string               | 是       | 在 Header 和 NavigationBar 之间动画过渡的标题文本                      |
+| `headerTitleStyle`     | StyleProp<TextStyle> | 否       | Header 标题的样式对象。支持所有 Text 样式属性。位置相对于 HeaderContent   |
+| `navigationTitleStyle` | StyleProp<TextStyle> | 否       | NavigationBar 标题的样式对象。支持除位置相关属性外的所有 Text 样式属性     |
+| `HeaderBackground`     | React.ComponentType  | 是       | 渲染为 Header 背景的组件                                              |
+| `HeaderContent`        | React.ComponentType  | 否       | 渲染在 Header 背景之上的组件。其透明度会根据滚动位置自动动画                |
+| `StickyComponent`      | React.ComponentType  | 否       | 可选的粘性组件，会固定在 NavigationBar 下方                             |
+| `...FlatListProps`     | FlatListProps        | -        | 支持所有标准的 FlatList 属性                                          |
 
-## Contributing
+## 贡献
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+查看[贡献指南](CONTRIBUTING.md)了解如何为该仓库做出贡献以及开发工作流程。
 
-## License
+## 许可证
 
 MIT
 
 ---
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+使用 [create-react-native-library](https://github.com/callstack/react-native-builder-bob) 创建 
