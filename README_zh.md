@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td><img width="250" height="541" src="./assets/iOS.gif" alt="iOS"></td>
-      <td><img width="250" height="514" src="./assets/Android.gif" alt="Android"></td>
+      <td><img width="263" height="541" src="./assets/Android.gif" alt="Android"></td>
     </tr>
   </table>
 </div>
