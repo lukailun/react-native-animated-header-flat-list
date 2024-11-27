@@ -1,10 +1,11 @@
 {
   "name": "react-native-animated-header-flat-list",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A React Native FlatList component with an animated collapsible header, featuring parallax effects, smooth title transitions, sticky component support, and customizable styles. Built with TypeScript and separate background/content layers in header.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
+  "types": "./lib/typescript/index.d.ts",
   "exports": {
     ".": {
       "import": {
@@ -56,7 +57,7 @@
     "type": "git",
     "url": "git+https://github.com/lukailun/react-native-animated-header-flat-list.git"
   },
-  "author": "Karen <957458041@qq.com> (https://github.com/lukailun)",
+  "author": "Karen (https://github.com/lukailun)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lukailun/react-native-animated-header-flat-list/issues"
