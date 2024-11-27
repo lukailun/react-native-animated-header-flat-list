@@ -1,7 +1,8 @@
 # react-native-animated-header-flat-list
 
+[![NPM Version](https://img.shields.io/npm/v/react-native-animated-header-flat-list)](https://www.npmjs.com/package/react-native-animated-header-flat-list)
 [![NPM License](https://img.shields.io/npm/l/react-native-animated-header-flat-list)](https://www.npmjs.com/package/react-native-animated-header-flat-list)
-[![NPM Type Definitions](https://img.shields.io/npm/types/react-native-animated-header-flat-list)](https://www.typescriptlang.org/)
+[![NPM Type Definitions](https://img.shields.io/npm/types/react-native-animated-header-flat-list)](https://www.npmjs.com/package/react-native-animated-header-flat-list)
 
 A React Native FlatList component with an animated collapsible header, featuring parallax effects, smooth title transitions, sticky component support, and customizable styles. Built with TypeScript and separate background/content layers in header.
 
