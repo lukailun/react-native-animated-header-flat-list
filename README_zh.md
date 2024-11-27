@@ -1,9 +1,7 @@
 # react-native-animated-header-flat-list
 
-[![Reanimated v3 version](https://img.shields.io/github/package-json/v/lukailun/react-native-animated-header-flat-list/master?label=Reanimated%20v3&style=flat-square)](https://www.npmjs.com/package/react-native-animated-header-flat-list)
 [![NPM License](https://img.shields.io/npm/l/react-native-animated-header-flat-list)](https://www.npmjs.com/package/react-native-animated-header-flat-list)
 [![NPM Type Definitions](https://img.shields.io/npm/types/react-native-animated-header-flat-list)](https://www.typescriptlang.org/)
-[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.dev/)
 
 一个带有动画折叠头部的 React Native FlatList 组件，具有视差效果、平滑标题过渡、粘性组件支持和可自定义样式。使用 TypeScript 构建，并在 Header 中实现了背景层和内容层的分离。
 
