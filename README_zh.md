@@ -56,14 +56,21 @@ npm install @react-navigation/native @react-navigation/native-stack @react-navig
 
 ### 额外配置
 
-对于 React Native Reanimated，需要在 `babel.config.js` 中添加：
+对于 React Native Reanimated，需要在 `babel.config.js` 中添加 `react-native-reanimated/plugin` 插件：
+
 ```js
 module.exports = {
+  presets: [
+    ... // 不要加在这里 :)
+  ],
   plugins: [
+    ...
     'react-native-reanimated/plugin',
   ],
 };
 ```
+
+注意：`react-native-reanimated/plugin` 必须放在插件列表的最后面。
 
 ## 使用示例
 

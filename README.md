@@ -56,14 +56,21 @@ Make sure to follow the installation instructions for each dependency:
 
 ### Additional Setup
 
-For React Native Reanimated, add this to your `babel.config.js`:
+For React Native Reanimated, Add `react-native-reanimated/plugin` plugin to your `babel.config.js`.
+
 ```js
 module.exports = {
+  presets: [
+    ... // don't add it here :)
+  ],
   plugins: [
+    ...
     'react-native-reanimated/plugin',
   ],
 };
 ```
+
+CAUTION: `react-native-reanimated/plugin` has to be listed last.
 
 ## Usage
 
@@ -200,7 +207,7 @@ const styles = StyleSheet.create({
 ### Props
 
 | Prop                   | Type                 | Required | Description                                                                                                               |
-| -------------------    | -------------------  | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `navigation`           | NavigationProp<any>  | Yes      | React Navigation navigation prop                                                                                          |
 | `title`                | string               | Yes      | The title text that will animate between header and navigation bar                                                        |
 | `headerTitleStyle`     | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container         |
