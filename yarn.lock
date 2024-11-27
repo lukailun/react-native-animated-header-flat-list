@@ -3406,7 +3406,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@release-it/conventional-changelog@npm:^9.0.2":
+"@release-it/conventional-changelog@npm:^9.0.3":
   version: 9.0.3
   resolution: "@release-it/conventional-changelog@npm:9.0.3"
   dependencies:
@@ -11965,7 +11965,7 @@ __metadata:
     "@react-navigation/elements": ^2.1.1
     "@react-navigation/native": ^7.0.4
     "@react-navigation/native-stack": ^7.1.1
-    "@release-it/conventional-changelog": ^9.0.2
+    "@release-it/conventional-changelog": ^9.0.3
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.44
     commitlint: ^17.0.2
