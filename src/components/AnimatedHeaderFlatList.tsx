@@ -23,6 +23,7 @@ interface Props {
   HeaderBackground: React.ComponentType<any>;
   HeaderContent?: React.ComponentType<any>;
   StickyComponent?: React.ComponentType<any>;
+  parallax?: boolean;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -42,6 +43,7 @@ export function AnimatedHeaderFlatList<T>({
   HeaderBackground,
   HeaderContent,
   StickyComponent,
+  parallax = true,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
   const {
@@ -97,7 +99,9 @@ export function AnimatedHeaderFlatList<T>({
             });
           }}
         >
-          <Animated.View style={headerBackgroundAnimatedStyle}>
+          <Animated.View
+            style={parallax ? headerBackgroundAnimatedStyle : undefined}
+          >
             <HeaderBackground />
           </Animated.View>
 
@@ -130,6 +134,7 @@ export function AnimatedHeaderFlatList<T>({
     );
   }, [
     navigationBarHeight,
+    parallax,
     headerBackgroundAnimatedStyle,
     HeaderBackground,
     HeaderContent,

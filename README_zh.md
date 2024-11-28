@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
 | `HeaderBackground`     | React.ComponentType  | 是       | 渲染为 Header 背景的组件                                              |
 | `HeaderContent`        | React.ComponentType  | 否       | 渲染在 Header 背景之上的组件。其透明度会根据滚动位置自动动画                |
 | `StickyComponent`      | React.ComponentType  | 否       | 可选的粘性组件，会固定在 NavigationBar 下方                             |
+| `parallax`             | boolean              | 否       | 启用/禁用头部背景的视差效果。默认为 true                                 |
 | `...FlatListProps`     | FlatListProps        | -        | 支持所有标准的 FlatList 属性                                          |
 
 ## 贡献

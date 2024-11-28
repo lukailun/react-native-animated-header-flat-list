@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
 | `HeaderBackground`     | React.ComponentType  | Yes      | Component to be rendered as the header background                                                                         |
 | `HeaderContent`        | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
 | `StickyComponent`      | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                                   |
+| `parallax`             | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                                    |
 | `...FlatListProps`     | FlatListProps        | -        | All standard FlatList props are supported                                                                                 |
 
 ## Contributing
