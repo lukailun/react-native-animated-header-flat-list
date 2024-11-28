@@ -91,7 +91,7 @@
     "typescript": "^5.7.2"
   },
   "resolutions": {
-    "@types/react": "^18.2.44"
+    "@types/react": "^18.3.12"
   },
   "peerDependencies": {
     "@react-navigation/elements": ">=2.0.0",
