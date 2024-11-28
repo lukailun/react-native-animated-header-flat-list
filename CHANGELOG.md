@@ -1,5 +1,12 @@
 
 
+## [1.2.2](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.1...v1.2.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* remove empty item ([26f970a](https://github.com/lukailun/react-native-animated-header-flat-list/commit/26f970aa1dfeb75f1e142db7d5e0a42482e6c402))
+
 ## [1.2.1](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.0...v1.2.1) (2024-11-28)
 
 
