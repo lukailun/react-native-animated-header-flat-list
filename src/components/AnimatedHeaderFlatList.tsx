@@ -11,8 +11,9 @@ import {
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import { type NavigationProp } from '@react-navigation/native';
-import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import Animated from 'react-native-reanimated';
+import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
+import { getFontSizeFromStyle } from '../utils/styleUtils';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -43,27 +44,6 @@ export function AnimatedHeaderFlatList<T>({
   StickyComponent,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
-  const getFontSizeFromStyle = useCallback(
-    (textStyle: StyleProp<TextStyle>) => {
-      if (!textStyle) return undefined;
-      if (Array.isArray(textStyle)) {
-        for (const styleItem of textStyle) {
-          if (
-            styleItem &&
-            typeof styleItem === 'object' &&
-            'fontSize' in styleItem
-          ) {
-            return styleItem.fontSize;
-          }
-        }
-      } else if (typeof textStyle === 'object' && 'fontSize' in textStyle) {
-        return textStyle.fontSize;
-      }
-      return undefined;
-    },
-    []
-  );
-
   const {
     scrollHandler,
     navigationBarHeight,
