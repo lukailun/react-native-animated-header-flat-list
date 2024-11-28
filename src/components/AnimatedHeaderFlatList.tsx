@@ -241,7 +241,6 @@ export function AnimatedHeaderFlatList<T>({
       <StatusBar backgroundColor="transparent" translucent />
       <Animated.FlatList
         {...flatListProps}
-        stickyHeaderHiddenOnScroll={false}
         stickyHeaderIndices={[1]}
         ListHeaderComponent={
           <Animated.View
