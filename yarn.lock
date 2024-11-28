@@ -6237,7 +6237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^9.0.0":
+"eslint-config-prettier@npm:^9.1.0":
   version: 9.1.0
   resolution: "eslint-config-prettier@npm:9.1.0"
   peerDependencies:
@@ -6291,7 +6291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^5.0.1":
+"eslint-plugin-prettier@npm:^5.2.1":
   version: 5.2.1
   resolution: "eslint-plugin-prettier@npm:5.2.1"
   dependencies:
@@ -12179,8 +12179,8 @@ __metadata:
     commitlint: ^19.6.0
     del-cli: ^6.0.0
     eslint: ^8.51.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.1
+    eslint-config-prettier: ^9.1.0
+    eslint-plugin-prettier: ^5.2.1
     jest: ^29.7.0
     prettier: ^3.0.3
     react: 18.3.1
