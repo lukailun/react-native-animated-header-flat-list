@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StatusBar,
   StyleSheet,
   View,
   type LayoutChangeEvent,
@@ -214,30 +215,33 @@ export function AnimatedHeaderFlatList<T>({
   );
 
   return (
-    <Animated.FlatList
-      {...flatListProps}
-      stickyHeaderHiddenOnScroll={false}
-      stickyHeaderIndices={[1]}
-      ListHeaderComponent={
-        <Animated.View
-          style={[
-            styles.mainHeaderContainer,
-            {
-              height: headerLayout.height - navigationBarHeight * 2,
-              transform: [{ translateY: navigationBarHeight }],
-            },
-          ]}
-        >
-          {ListHeaderComponent}
-        </Animated.View>
-      }
-      onScroll={scrollHandler}
-      data={[
-        'HEADER',
-        ...(Array.isArray(flatListProps.data) ? flatListProps.data : []),
-      ]}
-      renderItem={renderItem}
-    />
+    <>
+      <StatusBar backgroundColor="transparent" translucent />
+      <Animated.FlatList
+        {...flatListProps}
+        stickyHeaderHiddenOnScroll={false}
+        stickyHeaderIndices={[1]}
+        ListHeaderComponent={
+          <Animated.View
+            style={[
+              styles.mainHeaderContainer,
+              {
+                height: headerLayout.height - navigationBarHeight * 2,
+                transform: [{ translateY: navigationBarHeight }],
+              },
+            ]}
+          >
+            {ListHeaderComponent}
+          </Animated.View>
+        }
+        onScroll={scrollHandler}
+        data={[
+          'HEADER',
+          ...(Array.isArray(flatListProps.data) ? flatListProps.data : []),
+        ]}
+        renderItem={renderItem}
+      />
+    </>
   );
 }
 
