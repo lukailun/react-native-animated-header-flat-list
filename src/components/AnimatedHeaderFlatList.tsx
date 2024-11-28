@@ -33,7 +33,7 @@ type AnimatedHeaderFlatListProps<T> = Omit<
   Props;
 
 const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
-const EMPTY_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_EMPTY';
+const EMPTY_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_EMPTY_ITEM';
 
 export function AnimatedHeaderFlatList<T>({
   navigation,
@@ -148,67 +148,80 @@ export function AnimatedHeaderFlatList<T>({
 
   type CustomItem = typeof HEADER_ITEM | typeof EMPTY_ITEM | T;
 
+  const HeaderItem = useCallback(() => {
+    return (
+      <View
+        style={[
+          styles.stickyHeaderContainer,
+          {
+            height: navigationBarHeight + stickyComponentLayout.height,
+          },
+        ]}
+      >
+        <Animated.View
+          style={[
+            stickyHeaderAnimatedStyle,
+            styles.stickyHeader,
+            {
+              bottom:
+                headerLayout.height -
+                navigationBarHeight * 2 +
+                stickyComponentLayout.height,
+            },
+          ]}
+        >
+          {ListHeaderComponent}
+        </Animated.View>
+        {StickyComponent && (
+          <View
+            style={styles.stickyComponentContainer}
+            onLayout={(event: LayoutChangeEvent) => {
+              setStickyComponentLayout(event.nativeEvent.layout);
+            }}
+          >
+            <StickyComponent />
+          </View>
+        )}
+      </View>
+    );
+  }, [
+    ListHeaderComponent,
+    StickyComponent,
+    headerLayout.height,
+    navigationBarHeight,
+    setStickyComponentLayout,
+    stickyComponentLayout.height,
+    stickyHeaderAnimatedStyle,
+  ]);
+
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<CustomItem>): ReactElement | null => {
       if (item === HEADER_ITEM) {
-        return (
-          <View
-            style={[
-              styles.stickyHeaderContainer,
-              {
-                height: navigationBarHeight + stickyComponentLayout.height,
-              },
-            ]}
-          >
-            <Animated.View
-              style={[
-                stickyHeaderAnimatedStyle,
-                styles.stickyHeader,
-                {
-                  bottom:
-                    headerLayout.height -
-                    navigationBarHeight * 2 +
-                    stickyComponentLayout.height,
-                },
-              ]}
-            >
-              {ListHeaderComponent}
-            </Animated.View>
-            {StickyComponent && (
-              <View
-                style={styles.stickyComponentContainer}
-                onLayout={(event: LayoutChangeEvent) => {
-                  setStickyComponentLayout(event.nativeEvent.layout);
-                }}
-              >
-                <StickyComponent />
-              </View>
-            )}
-          </View>
-        );
+        return <HeaderItem />;
       }
       if (item === EMPTY_ITEM) {
         const EmptyComponent = flatListProps.ListEmptyComponent;
         if (typeof EmptyComponent === 'function') {
-          return createElement(EmptyComponent);
+          return (
+            <>
+              {HeaderItem()}
+              {createElement(EmptyComponent)}
+            </>
+          );
         }
-        return EmptyComponent as ReactElement | null;
+        return (
+          <>
+            {HeaderItem()}
+            {EmptyComponent as ReactElement | null}
+          </>
+        );
       }
       return flatListProps.renderItem &&
         typeof flatListProps.renderItem === 'function'
         ? flatListProps.renderItem({ item } as ListRenderItemInfo<T>)
         : null;
     },
-    [
-      flatListProps,
-      navigationBarHeight,
-      stickyComponentLayout.height,
-      stickyHeaderAnimatedStyle,
-      headerLayout.height,
-      ListHeaderComponent,
-      StickyComponent,
-      setStickyComponentLayout,
-    ]
+    [flatListProps, HeaderItem]
   );
 
   const data = useMemo(() => {
@@ -216,7 +229,7 @@ export function AnimatedHeaderFlatList<T>({
       ? flatListProps.data
       : [];
     if (listData.length === 0) {
-      return [HEADER_ITEM, EMPTY_ITEM];
+      return [EMPTY_ITEM];
     }
     return [HEADER_ITEM, ...listData];
   }, [flatListProps.data]);
