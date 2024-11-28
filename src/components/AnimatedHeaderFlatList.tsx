@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createElement, type ReactElement } from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -29,6 +29,9 @@ type AnimatedHeaderFlatListProps<T> = Omit<
   keyof Props
 > &
   Props;
+
+const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
+const EMPTY_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_EMPTY';
 
 export function AnimatedHeaderFlatList<T>({
   navigation,
@@ -158,9 +161,11 @@ export function AnimatedHeaderFlatList<T>({
     setHeaderTitleLayout,
   ]);
 
+  type CustomItem = typeof HEADER_ITEM | typeof EMPTY_ITEM | T;
+
   const renderItem = useCallback(
-    ({ item }: { item: 'HEADER' | T }) => {
-      if (item === 'HEADER') {
+    ({ item }: ListRenderItemInfo<CustomItem>): ReactElement | null => {
+      if (item === HEADER_ITEM) {
         return (
           <View
             style={[
@@ -197,6 +202,13 @@ export function AnimatedHeaderFlatList<T>({
           </View>
         );
       }
+      if (item === EMPTY_ITEM) {
+        const EmptyComponent = flatListProps.ListEmptyComponent;
+        if (typeof EmptyComponent === 'function') {
+          return createElement(EmptyComponent);
+        }
+        return EmptyComponent as ReactElement | null;
+      }
       return flatListProps.renderItem &&
         typeof flatListProps.renderItem === 'function'
         ? flatListProps.renderItem({ item } as ListRenderItemInfo<T>)
@@ -213,6 +225,16 @@ export function AnimatedHeaderFlatList<T>({
       setStickyComponentLayout,
     ]
   );
+
+  const data = useMemo(() => {
+    const listData = Array.isArray(flatListProps.data)
+      ? flatListProps.data
+      : [];
+    if (listData.length === 0) {
+      return [HEADER_ITEM, EMPTY_ITEM];
+    }
+    return [HEADER_ITEM, ...listData];
+  }, [flatListProps.data]);
 
   return (
     <>
@@ -235,10 +257,7 @@ export function AnimatedHeaderFlatList<T>({
           </Animated.View>
         }
         onScroll={scrollHandler}
-        data={[
-          'HEADER',
-          ...(Array.isArray(flatListProps.data) ? flatListProps.data : []),
-        ]}
+        data={data}
         renderItem={renderItem}
       />
     </>
