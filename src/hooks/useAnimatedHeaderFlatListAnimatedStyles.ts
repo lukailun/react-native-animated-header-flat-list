@@ -143,7 +143,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
             [
               1 - scrollY.value / (headerLayout.height - navigationBarHeight),
               1,
-              1,
             ],
             'clamp'
           ),
