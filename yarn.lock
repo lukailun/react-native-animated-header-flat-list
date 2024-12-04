@@ -1866,19 +1866,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.57.1":
-  version: 8.57.1
-  resolution: "@eslint/js@npm:8.57.1"
-  checksum: 2afb77454c06e8316793d2e8e79a0154854d35e6782a1217da274ca60b5044d2c69d6091155234ed0551a1e408f86f09dd4ece02752c59568fa403e60611e880
+"@eslint/js@npm:8.57.0":
+  version: 8.57.0
+  resolution: "@eslint/js@npm:8.57.0"
+  checksum: 315dc65b0e9893e2bff139bddace7ea601ad77ed47b4550e73da8c9c2d2766c7a575c3cddf17ef85b8fd6a36ff34f91729d0dcca56e73ca887c10df91a41b0bb
   languageName: node
   linkType: hard
 
-"@evilmartians/lefthook@npm:^1.8.4":
-  version: 1.8.4
-  resolution: "@evilmartians/lefthook@npm:1.8.4"
+"@evilmartians/lefthook@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "@evilmartians/lefthook@npm:1.8.5"
   bin:
     lefthook: bin/index.js
-  checksum: 790df52d089fcbe0052f521edd0ec7b60ebac52420b34d6b9cdcc5822167772fce84a9d952ec9007daad9fd0accf55e1c33bda671411aebe312ab3397c82f667
+  checksum: f9ff005105dd778f89ea18058c46186fb5a9aa46a47c5e24a7d63fe863d4437d134a5f4cd36bf8100fd2ddc6b54ff8715d2e5e6f8e503d7ef21e55c3f2f22be0
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=arm64 | cpu=ia32)
   languageName: node
   linkType: hard
@@ -2264,14 +2264,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/config-array@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "@humanwhocodes/config-array@npm:0.13.0"
+"@humanwhocodes/config-array@npm:^0.11.14":
+  version: 0.11.14
+  resolution: "@humanwhocodes/config-array@npm:0.11.14"
   dependencies:
-    "@humanwhocodes/object-schema": ^2.0.3
+    "@humanwhocodes/object-schema": ^2.0.2
     debug: ^4.3.1
     minimatch: ^3.0.5
-  checksum: eae69ff9134025dd2924f0b430eb324981494be26f0fddd267a33c28711c4db643242cf9fddf7dadb9d16c96b54b2d2c073e60a56477df86e0173149313bd5d6
+  checksum: 861ccce9eaea5de19546653bccf75bf09fe878bc39c3aab00aeee2d2a0e654516adad38dd1098aab5e3af0145bbcbf3f309bdf4d964f8dab9dcd5834ae4c02f2
   languageName: node
   linkType: hard
 
@@ -2282,7 +2282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/object-schema@npm:^2.0.3":
+"@humanwhocodes/object-schema@npm:^2.0.2":
   version: 2.0.3
   resolution: "@humanwhocodes/object-schema@npm:2.0.3"
   checksum: d3b78f6c5831888c6ecc899df0d03bcc25d46f3ad26a11d7ea52944dc36a35ef543fad965322174238d677a43d5c694434f6607532cff7077062513ad7022631
@@ -3134,6 +3134,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/core@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@react-navigation/core@npm:7.3.0"
+  dependencies:
+    "@react-navigation/routers": ^7.1.1
+    escape-string-regexp: ^4.0.0
+    nanoid: 3.3.7
+    query-string: ^7.1.3
+    react-is: ^18.2.0
+    use-latest-callback: ^0.2.1
+    use-sync-external-store: ^1.2.2
+  peerDependencies:
+    react: ">= 18.2.0"
+  checksum: bb0456b0a1f2627cbdf929b0b1249d5a291e90f80b5f4eaf03aede745316a672fbfb7410de296a13bba67f5c6fc0a3b2c56884227abf72cffe217ca97618ce4f
+  languageName: node
+  linkType: hard
+
 "@react-navigation/elements@npm:^2.1.1, @react-navigation/elements@npm:^2.1.7":
   version: 2.1.7
   resolution: "@react-navigation/elements@npm:2.1.7"
@@ -3152,7 +3169,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.1.1, @react-navigation/native-stack@npm:^7.1.9":
+"@react-navigation/elements@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "@react-navigation/elements@npm:2.2.4"
+  dependencies:
+    color: ^4.2.3
+  peerDependencies:
+    "@react-native-masked-view/masked-view": ">= 0.2.0"
+    "@react-navigation/native": ^7.0.13
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+  peerDependenciesMeta:
+    "@react-native-masked-view/masked-view":
+      optional: true
+  checksum: 6dd41b884c04dd3d1b463ccb1f62b7db09a9f8fab72360df1c2ea044fb1c5a1059484eefa571dcd16fdf0d40836aaba7c781c94174592899b153c91d0649edd7
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native-stack@npm:^7.1.1":
   version: 7.1.9
   resolution: "@react-navigation/native-stack@npm:7.1.9"
   dependencies:
@@ -3168,7 +3203,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^7.0.4, @react-navigation/native@npm:^7.0.8":
+"@react-navigation/native-stack@npm:^7.1.14":
+  version: 7.1.14
+  resolution: "@react-navigation/native-stack@npm:7.1.14"
+  dependencies:
+    "@react-navigation/elements": ^2.2.4
+    warn-once: ^0.1.1
+  peerDependencies:
+    "@react-navigation/native": ^7.0.13
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 5a7e16f04d991c78ae1b84277a2b760390f64226aecfea149917746cdf8b4c881e82f3f9148858dc5a31f7e932b70ba28310885b2c99fc5d720ffcb6bab193fc
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native@npm:^7.0.13":
+  version: 7.0.13
+  resolution: "@react-navigation/native@npm:7.0.13"
+  dependencies:
+    "@react-navigation/core": ^7.3.0
+    escape-string-regexp: ^4.0.0
+    fast-deep-equal: ^3.1.3
+    nanoid: 3.3.7
+    use-latest-callback: ^0.2.1
+  peerDependencies:
+    react: ">= 18.2.0"
+    react-native: "*"
+  checksum: 3a10645d9c8a6ceddd6d7bf7f9e87bfad03666ea422f847d7116fc3c650dbbb2605262606b5b7e2f8814c9bdd970f4bada9bc4b2db75adcef5c19f13dbc3de66
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native@npm:^7.0.4":
   version: 7.0.8
   resolution: "@react-navigation/native@npm:7.0.8"
   dependencies:
@@ -3190,6 +3257,15 @@ __metadata:
   dependencies:
     nanoid: 3.3.7
   checksum: 92de5679887b0b8498810ec705e22f62e673ae1e5582cf3d813b8cbca5528bc894a532988e24e178724f6dfe26f42572dc88cd4e5af8ac90f61669a095047be6
+  languageName: node
+  linkType: hard
+
+"@react-navigation/routers@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "@react-navigation/routers@npm:7.1.1"
+  dependencies:
+    nanoid: 3.3.7
+  checksum: 8f47aefd2a5104bdc66719eac907c0a1c9f16b68d5631e1ae52097a038f092552b4d28db244e6b9f7e4bac8ef8155c6eb5d357b670f2f102475d444fba84edb9
   languageName: node
   linkType: hard
 
@@ -6354,15 +6430,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.57.0":
-  version: 8.57.1
-  resolution: "eslint@npm:8.57.1"
+"eslint@npm:8.57.0":
+  version: 8.57.0
+  resolution: "eslint@npm:8.57.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.6.1
     "@eslint/eslintrc": ^2.1.4
-    "@eslint/js": 8.57.1
-    "@humanwhocodes/config-array": ^0.13.0
+    "@eslint/js": 8.57.0
+    "@humanwhocodes/config-array": ^0.11.14
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
     "@ungap/structured-clone": ^1.2.0
@@ -6398,7 +6474,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: e2489bb7f86dd2011967759a09164e65744ef7688c310bc990612fc26953f34cc391872807486b15c06833bdff737726a23e9b4cdba5de144c311377dc41d91b
+  checksum: 3a48d7ff85ab420a8447e9810d8087aea5b1df9ef68c9151732b478de698389ee656fd895635b5f2871c89ee5a2652b3f343d11e9db6f8486880374ebc74a2d9
   languageName: node
   linkType: hard
 
@@ -11793,12 +11869,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "prettier@npm:3.4.1"
+"prettier@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "prettier@npm:3.4.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: f83ae83e38ae38f42c0b174833f58f820ed6eb063abfc5aa6725e8f9c1d626b54b1cb9d595cace525f8d59de89e186285f6bbcb460dc644ea9d8a7823cc54aca
+  checksum: 061c84513db62d3944c8dc8df36584dad82883ce4e49efcdbedd8703dce5b173c33fd9d2a4e1725d642a3b713c932b55418342eaa347479bc4a9cca114a04cd0
   languageName: node
   linkType: hard
 
@@ -12118,24 +12194,24 @@ __metadata:
   resolution: "react-native-animated-header-flat-list@workspace:."
   dependencies:
     "@commitlint/config-conventional": 17.7.0
-    "@evilmartians/lefthook": ^1.8.4
+    "@evilmartians/lefthook": ^1.8.5
     "@react-native/eslint-config": 0.73.1
-    "@react-navigation/elements": ^2.1.7
-    "@react-navigation/native": ^7.0.8
-    "@react-navigation/native-stack": ^7.1.9
+    "@react-navigation/elements": ^2.2.4
+    "@react-navigation/native": ^7.0.13
+    "@react-navigation/native-stack": ^7.1.14
     "@release-it/conventional-changelog": 7.0.0
     "@types/jest": ^29.5.14
     "@types/react": ^18.3.12
     commitlint: ^19.6.0
     del-cli: ^6.0.0
-    eslint: ^8.57.0
+    eslint: 8.57.0
     eslint-config-prettier: ^9.1.0
     eslint-plugin-prettier: ^5.2.1
     jest: ^29.7.0
-    prettier: ^3.4.1
+    prettier: ^3.4.2
     react: 18.3.1
     react-native: 0.76.3
-    react-native-builder-bob: ^0.33.2
+    react-native-builder-bob: ^0.33.3
     react-native-reanimated: ^3.16.3
     react-native-safe-area-context: ^4.14.0
     release-it: 16.1.5
@@ -12183,9 +12259,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-builder-bob@npm:^0.33.2":
-  version: 0.33.2
-  resolution: "react-native-builder-bob@npm:0.33.2"
+"react-native-builder-bob@npm:^0.33.3":
+  version: 0.33.3
+  resolution: "react-native-builder-bob@npm:0.33.3"
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/plugin-transform-strict-mode": ^7.24.7
@@ -12211,7 +12287,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     bob: bin/bob
-  checksum: a018833d9e6629ac61867e983ec7d51bacde746c348fcbcc456dc671456f3b005cfa47a2fdb6b57e155cf6cc3e1ff06acb26e1fa34c735951aabc7c323b56cb1
+  checksum: 1f14b539804d39816ed5f8e171ad52e1bb3cf1828aebf3cd2671593997764a2e486cb421673394244bf8faaf09ff432f08a87bad2b4adcf293aaa7be0d8dc7e4
   languageName: node
   linkType: hard
 
