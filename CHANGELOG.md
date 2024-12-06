@@ -1,5 +1,12 @@
 
 
+## [1.2.3](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.2...v1.2.3) (2024-12-06)
+
+
+### Bug Fixes
+
+* remove redundant interpolation input range value ([fa99989](https://github.com/lukailun/react-native-animated-header-flat-list/commit/fa9998983ae4d2448fa60cb4a3318434753e812d))
+
 ## [1.2.2](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.1...v1.2.2) (2024-11-28)
 
 
