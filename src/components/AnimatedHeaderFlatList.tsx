@@ -3,6 +3,7 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  type ColorValue,
   type LayoutChangeEvent,
   type ListRenderItemInfo,
   type StyleProp,
@@ -18,6 +19,7 @@ import { getFontSizeFromStyle } from '../utils/styleUtils';
 interface Props {
   navigation: NavigationProp<any>;
   title: string;
+  navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
   navigationTitleStyle?: StyleProp<TextStyle>;
   HeaderBackground: React.ComponentType<any>;
@@ -37,6 +39,7 @@ const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
 export function AnimatedHeaderFlatList<T>({
   navigation,
   title,
+  navigationBarColor,
   headerTitleStyle,
   navigationTitleStyle,
   HeaderBackground,
@@ -53,6 +56,7 @@ export function AnimatedHeaderFlatList<T>({
     setHeaderTitleLayout,
     stickyComponentLayout,
     setStickyComponentLayout,
+    navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
@@ -103,7 +107,6 @@ export function AnimatedHeaderFlatList<T>({
           >
             <HeaderBackground />
           </Animated.View>
-
           {HeaderContent && (
             <Animated.View
               style={[
@@ -114,7 +117,15 @@ export function AnimatedHeaderFlatList<T>({
               <HeaderContent />
             </Animated.View>
           )}
-
+          {navigationBarColor && (
+            <Animated.View
+              style={[
+                navigationBarAnimatedStyle,
+                styles.animatedNavigationBar,
+                { backgroundColor: navigationBarColor },
+              ]}
+            />
+          )}
           <Animated.Text
             onLayout={(event: LayoutChangeEvent) => {
               setHeaderTitleLayout(event.nativeEvent.layout);
@@ -143,6 +154,8 @@ export function AnimatedHeaderFlatList<T>({
     title,
     setHeaderLayout,
     setHeaderTitleLayout,
+    navigationBarAnimatedStyle,
+    navigationBarColor,
   ]);
 
   type CustomItem = typeof HEADER_ITEM | T;
@@ -260,6 +273,12 @@ const styles = StyleSheet.create({
   },
   mainHeaderContainer: {
     overflow: 'visible',
+  },
+  animatedNavigationBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   headerTitle: {
     position: 'absolute',

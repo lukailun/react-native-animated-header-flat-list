@@ -29,6 +29,7 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   setHeaderTitleLayout: (layout: LayoutRectangle) => void;
   stickyComponentLayout: LayoutRectangle;
   setStickyComponentLayout: (layout: LayoutRectangle) => void;
+  navigationBarAnimatedStyle: AnimatedStyle<ViewStyle>;
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
@@ -69,6 +70,21 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     navigationBarHeight;
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
+  const navigationBarAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollY.value,
+        [0, headerLayout.height - navigationBarHeight * 2],
+        [0, 1],
+        'clamp'
+      ),
+      marginBottom: Math.max(
+        0,
+        headerLayout.height - navigationBarHeight * 2 - scrollY.value
+      ),
+      height: navigationBarHeight,
+    };
+  });
   const navigationTitleAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: navigationTitleOpacity.value,
@@ -169,6 +185,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     setHeaderTitleLayout,
     stickyComponentLayout,
     setStickyComponentLayout,
+    navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,
     stickyHeaderAnimatedStyle,
