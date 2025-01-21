@@ -1,5 +1,12 @@
 
 
+# [1.3.0](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.3...v1.3.0) (2025-01-21)
+
+
+### Features
+
+* add navigationBarColor prop to support animated navigation bar background ([df2253e](https://github.com/lukailun/react-native-animated-header-flat-list/commit/df2253e8b27d9efcb0c7fabba334ab8ef6c72375))
+
 ## [1.2.3](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.2...v1.2.3) (2024-12-06)
 
 

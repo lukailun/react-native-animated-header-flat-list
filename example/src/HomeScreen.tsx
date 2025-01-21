@@ -1,11 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
-
 export default function HomeScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const navigation = useNavigation();
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,

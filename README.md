@@ -76,13 +76,12 @@ CAUTION: `react-native-reanimated/plugin` has to be listed last.
 
 ```tsx
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const navigation = useNavigation();
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
 
 | Prop                   | Type                 | Required | Description                                                                                                               |
 | ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `navigation`           | NavigationProp<any>  | Yes      | React Navigation navigation prop                                                                                          |
+| `navigation`           | any                  | Yes      | React Navigation navigation prop                                                                                          |
 | `title`                | string               | Yes      | The title text that will animate between header and navigation bar                                                        |
 | `headerTitleStyle`     | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container         |
 | `navigationTitleStyle` | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties        |
@@ -216,6 +215,7 @@ const styles = StyleSheet.create({
 | `HeaderContent`        | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
 | `StickyComponent`      | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                                   |
 | `parallax`             | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                                    |
+| `navigationBarColor`   | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                                   |
 | `...FlatListProps`     | FlatListProps        | -        | All standard FlatList props are supported                                                                                 |
 
 ## Contributing
