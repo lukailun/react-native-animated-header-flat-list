@@ -69,7 +69,7 @@
     "@commitlint/config-conventional": "17.7.0",
     "@evilmartians/lefthook": "^1.8.5",
     "@react-native/eslint-config": "0.73.1",
-    "@react-navigation/elements": "^2.2.4",
+    "@react-navigation/elements": "^2.2.5",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/native-stack": "^7.2.0",
     "@release-it/conventional-changelog": "7.0.0",

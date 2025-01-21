@@ -11,13 +11,12 @@ import {
 } from 'react-native';
 import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
-import { type NavigationProp } from '@react-navigation/native';
 import Animated from 'react-native-reanimated';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import { getFontSizeFromStyle } from '../utils/styleUtils';
 
 interface Props {
-  navigation: NavigationProp<any>;
+  navigation: any;
   title: string;
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;

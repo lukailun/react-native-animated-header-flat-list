@@ -1852,11 +1852,11 @@ __metadata:
   linkType: hard
 
 "@evilmartians/lefthook@npm:^1.8.5":
-  version: 1.10.9
-  resolution: "@evilmartians/lefthook@npm:1.10.9"
+  version: 1.10.10
+  resolution: "@evilmartians/lefthook@npm:1.10.10"
   bin:
     lefthook: bin/index.js
-  checksum: 158ca3fa98cdfd562ec6c6c56ff3e3ac155f62f5dc1d598f0dd7c29554ed0ae5151207a71b22b718cc02a598db5f192af2d8d462382c27ac46f8f1042f9f950f
+  checksum: 024e00737291f7df861ee5f7f7b9ff9b54ad6c136792c620cfdb48c17e0b6f5a8d92e57081022e93d5e519f1b317409c84433b41200ab4e3fd66c265d9d31db0
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=arm64 | cpu=ia32)
   languageName: node
   linkType: hard
@@ -3130,7 +3130,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^2.2.4, @react-navigation/elements@npm:^2.2.5":
+"@react-navigation/elements@npm:^2.2.5":
   version: 2.2.5
   resolution: "@react-navigation/elements@npm:2.2.5"
   dependencies:
@@ -12244,7 +12244,7 @@ __metadata:
     "@commitlint/config-conventional": 17.7.0
     "@evilmartians/lefthook": ^1.8.5
     "@react-native/eslint-config": 0.73.1
-    "@react-navigation/elements": ^2.2.4
+    "@react-navigation/elements": ^2.2.5
     "@react-navigation/native": ^7.0.14
     "@react-navigation/native-stack": ^7.2.0
     "@release-it/conventional-changelog": 7.0.0
