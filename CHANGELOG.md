@@ -1,5 +1,13 @@
 
 
+## [1.3.1](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.3.0...v1.3.1) (2025-01-21)
+
+
+### Bug Fixes
+
+* change navigation prop type to any ([33377cf](https://github.com/lukailun/react-native-animated-header-flat-list/commit/33377cfcbfd3822a118752a7e6963b646bf3b15c))
+* update navigation type ([889d916](https://github.com/lukailun/react-native-animated-header-flat-list/commit/889d91616cad6a1aac7134f79a7307a22800b65c))
+
 # [1.3.0](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.2.3...v1.3.0) (2025-01-21)
 
 
