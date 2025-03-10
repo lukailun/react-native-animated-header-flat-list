@@ -194,18 +194,20 @@ const styles = StyleSheet.create({
 
 ### Props
 
-| Prop                   | Type                 | Required | Description                                                                                                               |
-| ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `navigation`           | any                  | Yes      | React Navigation navigation prop                                                                                          |
-| `title`                | string               | Yes      | The title text that will animate between header and navigation bar                                                        |
-| `headerTitleStyle`     | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container         |
-| `navigationTitleStyle` | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties        |
-| `HeaderBackground`     | React.ComponentType  | Yes      | Component to be rendered as the header background                                                                         |
-| `HeaderContent`        | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
-| `StickyComponent`      | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                                   |
-| `parallax`             | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                                    |
-| `navigationBarColor`   | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                                   |
-| `...FlatListProps`     | FlatListProps        | -        | All standard FlatList props are supported                                                                                 |
+| Prop                        | Type                 | Required | Description                                                                                                    |
+| --------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| `navigation`                | any                  | Yes      | React Navigation navigation prop                                                                               |
+| `title`                     | string               | Yes      | The title text that will animate between header and navigation bar                                             |
+| `headerTitleStyle`          | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container |
+| `navigationTitleStyle`      | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties |
+| `HeaderBackground`          | React.ComponentType  | Yes      | Component to be rendered as the header background                                                              |
+| `HeaderContent`             | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
+| `StickyComponent`           | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                        |
+| `parallax`                  | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                         |
+| `navigationBarColor`        | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                        |
+| `navigationTitleTranslateX` | number               | No       | Horizontal offset for the navigation title position. Defaults to 0                                             |
+| `navigationTitleTranslateY` | number               | No       | Vertical offset for the navigation title position. Defaults to 0                                               |
+| `...FlatListProps`          | FlatListProps        | -        | All standard FlatList props are supported                                                                      |
 
 ## Contributing
 

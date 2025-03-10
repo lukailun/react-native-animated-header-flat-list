@@ -18,6 +18,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 type AnimatedHeaderFlatListAnimatedStylesProps = {
   headerTitleFontSize?: number;
   navigationTitleFontSize?: number;
+  navigationTitleTranslateX?: number;
+  navigationTitleTranslateY?: number;
 };
 
 type AnimatedHeaderFlatListAnimatedStyles = {
@@ -40,6 +42,8 @@ type AnimatedHeaderFlatListAnimatedStyles = {
 export const useAnimatedHeaderFlatListAnimatedStyles = ({
   headerTitleFontSize,
   navigationTitleFontSize,
+  navigationTitleTranslateX = 0,
+  navigationTitleTranslateY = 0,
 }: AnimatedHeaderFlatListAnimatedStylesProps): AnimatedHeaderFlatListAnimatedStyles => {
   const { width: windowWidth } = useWindowDimensions();
   const scrollY = useSharedValue(0);
@@ -88,6 +92,10 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
   const navigationTitleAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: navigationTitleOpacity.value,
+      transform: [
+        { translateX: navigationTitleTranslateX },
+        { translateY: navigationTitleTranslateY },
+      ],
     };
   });
   const headerTitleAnimatedStyle = useAnimatedStyle(() => {
@@ -102,8 +110,17 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
               0,
               windowWidth / 2 -
                 headerTitleLayout.x -
-                headerTitleLayout.width / 2,
+                headerTitleLayout.width / 2 +
+                navigationTitleTranslateX,
             ],
+            'clamp'
+          ),
+        },
+        {
+          translateY: interpolate(
+            scrollY.value,
+            [0, distanceBetweenTitleAndNavigationBar],
+            [0, navigationTitleTranslateY],
             'clamp'
           ),
         },

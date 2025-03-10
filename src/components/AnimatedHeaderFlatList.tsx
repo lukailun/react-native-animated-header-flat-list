@@ -16,15 +16,18 @@ import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHea
 import { getFontSizeFromStyle } from '../utils/styleUtils';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any;
   title: string;
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
   navigationTitleStyle?: StyleProp<TextStyle>;
-  HeaderBackground: React.ComponentType<any>;
-  HeaderContent?: React.ComponentType<any>;
-  StickyComponent?: React.ComponentType<any>;
+  HeaderBackground: React.ComponentType;
+  HeaderContent?: React.ComponentType;
+  StickyComponent?: React.ComponentType;
   parallax?: boolean;
+  navigationTitleTranslateX?: number;
+  navigationTitleTranslateY?: number;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -45,6 +48,8 @@ export function AnimatedHeaderFlatList<T>({
   HeaderContent,
   StickyComponent,
   parallax = true,
+  navigationTitleTranslateX = 0,
+  navigationTitleTranslateY = 0,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
   const {
@@ -64,6 +69,8 @@ export function AnimatedHeaderFlatList<T>({
   } = useAnimatedHeaderFlatListAnimatedStyles({
     headerTitleFontSize: getFontSizeFromStyle(headerTitleStyle),
     navigationTitleFontSize: getFontSizeFromStyle(navigationTitleStyle),
+    navigationTitleTranslateX,
+    navigationTitleTranslateY,
   });
 
   const navigationTitle = useCallback(

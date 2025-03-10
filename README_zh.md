@@ -194,18 +194,20 @@ const styles = StyleSheet.create({
 
 ### 属性
 
-| 属性                   | 类型                 | 是否必需 | 描述                                                                    |
-| ---------------------- | -------------------- | -------- | ----------------------------------------------------------------------- |
-| `navigation`           | any                  | 是       | React Navigation 导航属性                                               |
-| `title`                | string               | 是       | 在 Header 和 NavigationBar 之间动画过渡的标题文本                       |
-| `headerTitleStyle`     | StyleProp<TextStyle> | 否       | Header 标题的样式对象。支持所有 Text 样式属性。位置相对于 HeaderContent |
-| `navigationTitleStyle` | StyleProp<TextStyle> | 否       | NavigationBar 标题的样式对象。支持除位置相关属性外的所有 Text 样式属性  |
-| `HeaderBackground`     | React.ComponentType  | 是       | 渲染为 Header 背景的组件                                                |
-| `HeaderContent`        | React.ComponentType  | 否       | 渲染在 Header 背景之上的组件。其透明度会根据滚动位置自动动画            |
-| `StickyComponent`      | React.ComponentType  | 否       | 可选的粘性组件，会固定在 NavigationBar 下方                             |
-| `parallax`             | boolean              | 否       | 启用/禁用头部背景的视差效果。默认为 true                                |
-| `navigationBarColor`   | ColorValue           | 否       | NavigationBar 的颜色。其透明度会根据滚动位置自动动画                    |
-| `...FlatListProps`     | FlatListProps        | -        | 支持所有标准的 FlatList 属性                                            |
+| 属性                        | 类型                 | 是否必需 | 描述                                                                         |
+| --------------------------- | -------------------- | -------- | ---------------------------------------------------------------------------- |
+| `navigation`                | any                  | 是       | React Navigation 导航属性                                                     |
+| `title`                     | string               | 是       | 在 Header 和 NavigationBar 之间动画过渡的标题文本                            |
+| `headerTitleStyle`          | StyleProp<TextStyle> | 否       | Header 标题的样式对象。支持所有 Text 样式属性。位置相对于 HeaderContent      |
+| `navigationTitleStyle`      | StyleProp<TextStyle> | 否       | NavigationBar 标题的样式对象。支持除位置相关属性外的所有 Text 样式属性       |
+| `HeaderBackground`          | React.ComponentType  | 是       | 渲染为 Header 背景的组件                                                     |
+| `HeaderContent`             | React.ComponentType  | 否       | 渲染在 Header 背景之上的组件。其透明度会根据滚动位置自动动画                |
+| `StickyComponent`           | React.ComponentType  | 否       | 可选的粘性组件，会固定在 NavigationBar 下方                                  |
+| `parallax`                  | boolean              | 否       | 启用/禁用头部背景的视差效果。默认为 true                                     |
+| `navigationBarColor`        | ColorValue           | 否       | NavigationBar 的颜色。其透明度会根据滚动位置自动动画                         |
+| `navigationTitleTranslateX` | number               | 否       | 导航栏标题的水平偏移量。默认为 0                                             |
+| `navigationTitleTranslateY` | number               | 否       | 导航栏标题的垂直偏移量。默认为 0                                             |
+| `...FlatListProps`          | FlatListProps        | -        | 支持所有标准的 FlatList 属性                                                 |
 
 ## 贡献
 
