@@ -76,7 +76,6 @@ CAUTION: `react-native-reanimated/plugin` has to be listed last.
 
 ```tsx
 import { useNavigation } from '@react-navigation/native';
-import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
@@ -92,42 +91,32 @@ export default function HomeScreen() {
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
   const avatarUrl = 'https://api.dicebear.com/7.x/avataaars/png?seed=John';
 
-  const HeaderBackground = useCallback(
-    () => (
-      <ImageBackground
-        source={{ uri: backgroundImageUrl }}
-        style={styles.headerBackground}
-      />
-    ),
-    [backgroundImageUrl]
+  const HeaderBackground = () => (
+    <ImageBackground
+      source={{ uri: backgroundImageUrl }}
+      style={styles.headerBackground}
+    />
   );
 
-  const HeaderContent = useCallback(
-    () => (
-      <View style={styles.headerContent}>
-        <Image source={{ uri: avatarUrl }} style={styles.avatar} />
-      </View>
-    ),
-    [avatarUrl]
+  const HeaderContent = () => (
+    <View style={styles.headerContent}>
+      <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+    </View>
   );
 
-  const StickyComponent = useCallback(
-    () => <Text style={styles.stickyComponent}>Sticky Item</Text>,
-    []
+  const StickyComponent = () => (
+    <Text style={styles.stickyComponent}>Sticky Item</Text>
   );
 
-  const renderItem = useCallback(
-    ({
-      item,
-    }: {
-      item: { id: string; title: string; description: string };
-    }) => (
-      <View style={styles.listItem}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemDescription}>{item.description}</Text>
-      </View>
-    ),
-    []
+  const renderItem = ({
+    item,
+  }: {
+    item: { id: string; title: string; description: string };
+  }) => (
+    <View style={styles.listItem}>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemDescription}>{item.description}</Text>
+    </View>
   );
 
   return (
