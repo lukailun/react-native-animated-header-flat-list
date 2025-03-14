@@ -76,7 +76,6 @@ CAUTION: `react-native-reanimated/plugin` has to be listed last.
 
 ```tsx
 import { useNavigation } from '@react-navigation/native';
-import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
@@ -92,42 +91,32 @@ export default function HomeScreen() {
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
   const avatarUrl = 'https://api.dicebear.com/7.x/avataaars/png?seed=John';
 
-  const HeaderBackground = useCallback(
-    () => (
-      <ImageBackground
-        source={{ uri: backgroundImageUrl }}
-        style={styles.headerBackground}
-      />
-    ),
-    [backgroundImageUrl]
+  const HeaderBackground = () => (
+    <ImageBackground
+      source={{ uri: backgroundImageUrl }}
+      style={styles.headerBackground}
+    />
   );
 
-  const HeaderContent = useCallback(
-    () => (
-      <View style={styles.headerContent}>
-        <Image source={{ uri: avatarUrl }} style={styles.avatar} />
-      </View>
-    ),
-    [avatarUrl]
+  const HeaderContent = () => (
+    <View style={styles.headerContent}>
+      <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+    </View>
   );
 
-  const StickyComponent = useCallback(
-    () => <Text style={styles.stickyComponent}>Sticky Item</Text>,
-    []
+  const StickyComponent = () => (
+    <Text style={styles.stickyComponent}>Sticky Item</Text>
   );
 
-  const renderItem = useCallback(
-    ({
-      item,
-    }: {
-      item: { id: string; title: string; description: string };
-    }) => (
-      <View style={styles.listItem}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemDescription}>{item.description}</Text>
-      </View>
-    ),
-    []
+  const renderItem = ({
+    item,
+  }: {
+    item: { id: string; title: string; description: string };
+  }) => (
+    <View style={styles.listItem}>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemDescription}>{item.description}</Text>
+    </View>
   );
 
   return (
@@ -205,18 +194,20 @@ const styles = StyleSheet.create({
 
 ### Props
 
-| Prop                   | Type                 | Required | Description                                                                                                               |
-| ---------------------- | -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `navigation`           | any                  | Yes      | React Navigation navigation prop                                                                                          |
-| `title`                | string               | Yes      | The title text that will animate between header and navigation bar                                                        |
-| `headerTitleStyle`     | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container         |
-| `navigationTitleStyle` | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties        |
-| `HeaderBackground`     | React.ComponentType  | Yes      | Component to be rendered as the header background                                                                         |
-| `HeaderContent`        | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
-| `StickyComponent`      | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                                   |
-| `parallax`             | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                                    |
-| `navigationBarColor`   | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                                   |
-| `...FlatListProps`     | FlatListProps        | -        | All standard FlatList props are supported                                                                                 |
+| Prop                        | Type                 | Required | Description                                                                                                    |
+| --------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| `navigation`                | any                  | Yes      | React Navigation navigation prop                                                                               |
+| `title`                     | string               | Yes      | The title text that will animate between header and navigation bar                                             |
+| `headerTitleStyle`          | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container |
+| `navigationTitleStyle`      | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties |
+| `HeaderBackground`          | React.ComponentType  | Yes      | Component to be rendered as the header background                                                              |
+| `HeaderContent`             | React.ComponentType  | No       | Component to be rendered on top of the header background. Its opacity will automatically animate based on scroll position |
+| `StickyComponent`           | React.ComponentType  | No       | Optional component that sticks below the navigation bar                                                        |
+| `parallax`                  | boolean              | No       | Enable/disable parallax effect for header background. Defaults to true                                         |
+| `navigationBarColor`        | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                        |
+| `navigationTitleTranslateX` | number               | No       | Horizontal offset for the navigation title position. Defaults to 0                                             |
+| `navigationTitleTranslateY` | number               | No       | Vertical offset for the navigation title position. Defaults to 0                                               |
+| `...FlatListProps`          | FlatListProps        | -        | All standard FlatList props are supported                                                                      |
 
 ## Contributing
 
