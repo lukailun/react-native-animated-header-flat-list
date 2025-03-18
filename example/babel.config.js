@@ -1,6 +1,6 @@
-const path = require('path');
-const { getConfig } = require('react-native-builder-bob/babel-config');
-const pkg = require('../package.json');
+import path from 'path';
+import { getConfig } from 'react-native-builder-bob/babel-config';
+import pkg from '../package.json';
 
 const root = path.resolve(__dirname, '..');
 
