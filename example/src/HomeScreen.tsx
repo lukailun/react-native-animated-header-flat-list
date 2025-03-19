@@ -10,26 +10,6 @@ export default function HomeScreen() {
     description: 'Lorem ipsum dolor sit amet',
   }));
   const title = 'Animated Title';
-  const backgroundImageUrl =
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
-  const avatarUrl = 'https://api.dicebear.com/7.x/avataaars/png?seed=John';
-
-  const HeaderBackground = () => (
-    <ImageBackground
-      source={{ uri: backgroundImageUrl }}
-      style={styles.headerBackground}
-    />
-  );
-
-  const HeaderContent = () => (
-    <View style={styles.headerContent}>
-      <Image source={{ uri: avatarUrl }} style={styles.avatar} />
-    </View>
-  );
-
-  const StickyComponent = () => (
-    <Text style={styles.stickyComponent}>Sticky Item</Text>
-  );
 
   const renderItem = ({
     item,
@@ -56,6 +36,32 @@ export default function HomeScreen() {
     />
   );
 }
+
+const HeaderBackground = () => {
+  const backgroundImageUrl =
+    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
+
+  return (
+    <ImageBackground
+      source={{ uri: backgroundImageUrl }}
+      style={styles.headerBackground}
+    />
+  );
+};
+
+const HeaderContent = () => {
+  const avatarUrl = 'https://api.dicebear.com/7.x/avataaars/png?seed=John';
+
+  return (
+    <View style={styles.headerContent}>
+      <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+    </View>
+  );
+};
+
+const StickyComponent = () => (
+  <Text style={styles.stickyComponent}>Sticky Item</Text>
+);
 
 const styles = StyleSheet.create({
   headerBackground: {
