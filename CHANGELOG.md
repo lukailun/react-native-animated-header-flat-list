@@ -1,5 +1,12 @@
 
 
+## [1.4.2](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.4.1...v1.4.2) (2025-04-08)
+
+
+### Bug Fixes
+
+* optimize sticky component display after layout completion ([4a4d7e8](https://github.com/lukailun/react-native-animated-header-flat-list/commit/4a4d7e8118dab3d23ff0983c36546511c9f912ce))
+
 ## [1.4.1](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.4.0...v1.4.1) (2025-03-19)
 
 
