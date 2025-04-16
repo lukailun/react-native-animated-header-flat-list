@@ -1,5 +1,5 @@
 import { useHeaderHeight } from '@react-navigation/elements';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   useWindowDimensions,
   type LayoutRectangle,
@@ -31,6 +31,7 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   setHeaderTitleLayout: (layout: LayoutRectangle) => void;
   stickyComponentLayout: LayoutRectangle;
   setStickyComponentLayout: (layout: LayoutRectangle) => void;
+  stickyComponentAnimatedStyle: AnimatedStyle<ViewStyle>;
   navigationBarAnimatedStyle: AnimatedStyle<ViewStyle>;
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
@@ -61,7 +62,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     width: 0,
     height: 0,
   });
-  const [stickyComponentLayout, setStickyComponentLayout] =
+  const [stickyComponentLayout, updateStickyComponentLayout] =
     useState<LayoutRectangle>({
       x: 0,
       y: 0,
@@ -74,6 +75,14 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     navigationBarHeight;
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
+  const stickyComponentOpacity = useSharedValue(0);
+  const setStickyComponentLayout = useCallback(
+    (layout: LayoutRectangle) => {
+      updateStickyComponentLayout(layout);
+      stickyComponentOpacity.value = layout.height > 0 ? 1 : 0;
+    },
+    [updateStickyComponentLayout, stickyComponentOpacity]
+  );
   const navigationBarAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
@@ -183,6 +192,11 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       ],
     };
   });
+  const stickyComponentAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: stickyComponentOpacity.value,
+    };
+  });
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
     navigationTitleOpacity.value =
@@ -202,6 +216,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     setHeaderTitleLayout,
     stickyComponentLayout,
     setStickyComponentLayout,
+    stickyComponentAnimatedStyle,
     navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,

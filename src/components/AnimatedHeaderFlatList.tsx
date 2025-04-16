@@ -60,6 +60,7 @@ export function AnimatedHeaderFlatList<T>({
     setHeaderTitleLayout,
     stickyComponentLayout,
     setStickyComponentLayout,
+    stickyComponentAnimatedStyle,
     navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,
@@ -193,14 +194,17 @@ export function AnimatedHeaderFlatList<T>({
               {ListHeaderComponent}
             </Animated.View>
             {StickyComponent && (
-              <View
-                style={styles.stickyComponentContainer}
+              <Animated.View
+                style={[
+                  styles.stickyComponentContainer,
+                  stickyComponentAnimatedStyle,
+                ]}
                 onLayout={(event: LayoutChangeEvent) => {
                   setStickyComponentLayout(event.nativeEvent.layout);
                 }}
               >
                 <StickyComponent />
-              </View>
+              </Animated.View>
             )}
           </View>
         );
@@ -214,6 +218,7 @@ export function AnimatedHeaderFlatList<T>({
       flatListProps,
       navigationBarHeight,
       stickyComponentLayout.height,
+      stickyComponentAnimatedStyle,
       stickyHeaderAnimatedStyle,
       headerLayout.height,
       ListHeaderComponent,
