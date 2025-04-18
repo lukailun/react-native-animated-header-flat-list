@@ -43,7 +43,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "flat-list",
+    "animated"
   ],
   "repository": {
     "type": "git",
