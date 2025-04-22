@@ -5038,7 +5038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitlint@npm:^19.8.0":
+"commitlint@npm:^19.6.1":
   version: 19.8.0
   resolution: "commitlint@npm:19.8.0"
   dependencies:
@@ -11919,7 +11919,7 @@ __metadata:
     "@release-it/conventional-changelog": ^9.0.2
     "@types/jest": ^29.5.5
     "@types/react": ^19.0.12
-    commitlint: ^19.8.0
+    commitlint: ^19.6.1
     del-cli: ^5.1.0
     eslint: ^9.22.0
     eslint-config-prettier: ^10.1.1
