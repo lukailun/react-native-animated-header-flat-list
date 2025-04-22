@@ -1,4 +1,24 @@
+# Changelog
 
+## <small>1.4.3 (2025-04-22)</small>
+
+* fix: downgrade react-native-builder-bob to 0.37.0 ([4ee989c](https://github.com/lukailun/react-native-animated-header-flat-list/commit/4ee989c))
+* fix: downgrade react-native-builder-bob to exact version ([f165587](https://github.com/lukailun/react-native-animated-header-flat-list/commit/f165587))
+* fix: update stickyHeaderContainer style to fix ui glitch on web ([5609919](https://github.com/lukailun/react-native-animated-header-flat-list/commit/5609919))
+* chore: add keywords flat-list and animated to package.json ([889a0fe](https://github.com/lukailun/react-native-animated-header-flat-list/commit/889a0fe))
+* chore: downgrade commitlint to v19.6.1 ([24e1859](https://github.com/lukailun/react-native-animated-header-flat-list/commit/24e1859))
+* chore: revert dependencies to previous versions ([92b5585](https://github.com/lukailun/react-native-animated-header-flat-list/commit/92b5585))
+* chore: update dependencies ([679098d](https://github.com/lukailun/react-native-animated-header-flat-list/commit/679098d))
+* chore: update dependencies ([219457b](https://github.com/lukailun/react-native-animated-header-flat-list/commit/219457b))
+* chore: update dependencies ([9649a3b](https://github.com/lukailun/react-native-animated-header-flat-list/commit/9649a3b))
+* chore: update dependencies ([6f37826](https://github.com/lukailun/react-native-animated-header-flat-list/commit/6f37826))
+* chore: update dependencies ([e522f02](https://github.com/lukailun/react-native-animated-header-flat-list/commit/e522f02))
+* chore: update dependencies ([4be6712](https://github.com/lukailun/react-native-animated-header-flat-list/commit/4be6712))
+* chore: update dependencies ([4912b49](https://github.com/lukailun/react-native-animated-header-flat-list/commit/4912b49))
+* chore: update dependencies ([72e7124](https://github.com/lukailun/react-native-animated-header-flat-list/commit/72e7124))
+* chore: update dependencies ([ce68d62](https://github.com/lukailun/react-native-animated-header-flat-list/commit/ce68d62))
+* chore: update dependencies ([128662f](https://github.com/lukailun/react-native-animated-header-flat-list/commit/128662f))
+* chore: update release-it config to use CHANGELOG.md ([7ef43f1](https://github.com/lukailun/react-native-animated-header-flat-list/commit/7ef43f1))
 
 ## [1.4.2](https://github.com/lukailun/react-native-animated-header-flat-list/compare/v1.4.1...v1.4.2) (2025-04-08)
 
