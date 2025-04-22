@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     overflow: 'visible',
   },
   stickyHeaderContainer: {
-    overflow: 'scroll',
+    width: '100%',
   },
   stickyHeader: {
     position: 'absolute',
