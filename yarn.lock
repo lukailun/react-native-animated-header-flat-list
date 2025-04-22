@@ -11932,7 +11932,7 @@ __metadata:
     react-native-reanimated: ^3.17.4
     react-native-safe-area-context: ^5.3.0
     release-it: ^17.10.0
-    typescript: ^5.8.3
+    typescript: ^5.2.2
   peerDependencies:
     "@react-navigation/elements": ">=2.0.0"
     "@react-navigation/native": ">=7.0.0"
@@ -13963,7 +13963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.8.3":
+"typescript@npm:^5.2.2":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -13973,7 +13973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.8.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=14eedb"
   bin:
