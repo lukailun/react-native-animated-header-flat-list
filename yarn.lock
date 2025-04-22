@@ -11928,7 +11928,7 @@ __metadata:
     prettier: ^3.0.3
     react: 18.3.1
     react-native: 0.76.9
-    react-native-builder-bob: 0.40.5
+    react-native-builder-bob: 0.37.0
     react-native-reanimated: ^3.17.4
     react-native-safe-area-context: ^5.3.0
     release-it: ^17.10.0
@@ -11944,9 +11944,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-builder-bob@npm:0.40.5":
-  version: 0.40.5
-  resolution: "react-native-builder-bob@npm:0.40.5"
+"react-native-builder-bob@npm:0.37.0":
+  version: 0.37.0
+  resolution: "react-native-builder-bob@npm:0.37.0"
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/plugin-transform-strict-mode": ^7.24.7
@@ -11954,9 +11954,9 @@ __metadata:
     "@babel/preset-flow": ^7.24.7
     "@babel/preset-react": ^7.24.7
     "@babel/preset-typescript": ^7.24.7
-    arktype: ^2.1.15
     babel-plugin-module-resolver: ^5.0.2
     browserslist: ^4.20.4
+    cosmiconfig: ^9.0.0
     cross-spawn: ^7.0.3
     dedent: ^0.7.0
     del: ^6.1.1
@@ -11972,7 +11972,7 @@ __metadata:
     yargs: ^17.5.1
   bin:
     bob: bin/bob
-  checksum: 20fc633d6cb311d76c139064d1bf45c36f100ad5f7799d9a21d0c5d85f6d588740f2604e1014730071058a2d55e95f87363674987860fa0e246c547219771ad6
+  checksum: 854a4ebbdf8b5a8447192d601074415e017b6bca5e973e88c4be434e7b5aa2f829b82bedf47837704d9cafce1ba16ea7187ad920b8eed81a2315b350c707b80f
   languageName: node
   linkType: hard
 
