@@ -54,24 +54,6 @@ npm install @react-navigation/native @react-navigation/native-stack @react-navig
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
-### 额外配置
-
-对于 React Native Reanimated，需要在 `babel.config.js` 中添加 `react-native-reanimated/plugin` 插件：
-
-```js
-module.exports = {
-  presets: [
-    ... // 不要加在这里 :)
-  ],
-  plugins: [
-    ...
-    'react-native-reanimated/plugin',
-  ],
-};
-```
-
-注意：`react-native-reanimated/plugin` 必须放在插件列表的最后面。
-
 ## 使用示例
 
 ```tsx

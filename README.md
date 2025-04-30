@@ -54,24 +54,6 @@ Make sure to follow the installation instructions for each dependency:
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
-### Additional Setup
-
-For React Native Reanimated, Add `react-native-reanimated/plugin` plugin to your `babel.config.js`.
-
-```js
-module.exports = {
-  presets: [
-    ... // don't add it here :)
-  ],
-  plugins: [
-    ...
-    'react-native-reanimated/plugin',
-  ],
-};
-```
-
-CAUTION: `react-native-reanimated/plugin` has to be listed last.
-
 ## Usage
 
 ```tsx
