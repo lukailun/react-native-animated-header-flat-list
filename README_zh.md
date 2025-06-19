@@ -54,33 +54,14 @@ npm install @react-navigation/native @react-navigation/native-stack @react-navig
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
-### 额外配置
-
-对于 React Native Reanimated，需要在 `babel.config.js` 中添加 `react-native-reanimated/plugin` 插件：
-
-```js
-module.exports = {
-  presets: [
-    ... // 不要加在这里 :)
-  ],
-  plugins: [
-    ...
-    'react-native-reanimated/plugin',
-  ],
-};
-```
-
-注意：`react-native-reanimated/plugin` 必须放在插件列表的最后面。
-
 ## 使用示例
 
 ```tsx
-import { useNavigation } from '@react-navigation/native';
+import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,
@@ -88,20 +69,22 @@ export default function HomeScreen() {
   }));
   const title = 'Animated Title';
 
-  const renderItem = ({
-    item,
-  }: {
-    item: { id: string; title: string; description: string };
-  }) => (
-    <View style={styles.listItem}>
-      <Text style={styles.itemTitle}>{item.title}</Text>
-      <Text style={styles.itemDescription}>{item.description}</Text>
-    </View>
+  const renderItem = useCallback(
+    ({
+      item,
+    }: {
+      item: { id: string; title: string; description: string };
+    }) => (
+      <View style={styles.listItem}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+    ),
+    []
   );
 
   return (
     <AnimatedHeaderFlatList
-      navigation={navigation}
       title={title}
       headerTitleStyle={styles.headerTitle}
       navigationTitleStyle={styles.navigationTitle}
@@ -202,7 +185,6 @@ const styles = StyleSheet.create({
 
 | 属性                        | 类型                 | 是否必需 | 描述                                                                         |
 | --------------------------- | -------------------- | -------- | ---------------------------------------------------------------------------- |
-| `navigation`                | any                  | 是       | React Navigation 导航属性                                                     |
 | `title`                     | string               | 是       | 在 Header 和 NavigationBar 之间动画过渡的标题文本                            |
 | `headerTitleStyle`          | StyleProp<TextStyle> | 否       | Header 标题的样式对象。支持所有 Text 样式属性。位置相对于 HeaderContent      |
 | `navigationTitleStyle`      | StyleProp<TextStyle> | 否       | NavigationBar 标题的样式对象。支持除位置相关属性外的所有 Text 样式属性       |

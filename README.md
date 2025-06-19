@@ -54,33 +54,14 @@ Make sure to follow the installation instructions for each dependency:
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
 
-### Additional Setup
-
-For React Native Reanimated, Add `react-native-reanimated/plugin` plugin to your `babel.config.js`.
-
-```js
-module.exports = {
-  presets: [
-    ... // don't add it here :)
-  ],
-  plugins: [
-    ...
-    'react-native-reanimated/plugin',
-  ],
-};
-```
-
-CAUTION: `react-native-reanimated/plugin` has to be listed last.
-
 ## Usage
 
 ```tsx
-import { useNavigation } from '@react-navigation/native';
+import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,
@@ -88,20 +69,22 @@ export default function HomeScreen() {
   }));
   const title = 'Animated Title';
 
-  const renderItem = ({
-    item,
-  }: {
-    item: { id: string; title: string; description: string };
-  }) => (
-    <View style={styles.listItem}>
-      <Text style={styles.itemTitle}>{item.title}</Text>
-      <Text style={styles.itemDescription}>{item.description}</Text>
-    </View>
+  const renderItem = useCallback(
+    ({
+      item,
+    }: {
+      item: { id: string; title: string; description: string };
+    }) => (
+      <View style={styles.listItem}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+    ),
+    []
   );
 
   return (
     <AnimatedHeaderFlatList
-      navigation={navigation}
       title={title}
       headerTitleStyle={styles.headerTitle}
       navigationTitleStyle={styles.navigationTitle}
@@ -202,7 +185,6 @@ const styles = StyleSheet.create({
 
 | Prop                        | Type                 | Required | Description                                                                                                    |
 | --------------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| `navigation`                | any                  | Yes      | React Navigation navigation prop                                                                               |
 | `title`                     | string               | Yes      | The title text that will animate between header and navigation bar                                             |
 | `headerTitleStyle`          | StyleProp<TextStyle> | No       | Style object for the title in the header. Supports all Text style props. Position is relative to header container |
 | `navigationTitleStyle`      | StyleProp<TextStyle> | No       | Style object for the title in the navigation bar. Supports all Text style props except position-related properties |

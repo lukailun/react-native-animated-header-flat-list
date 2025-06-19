@@ -1,9 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
+import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,
@@ -11,20 +10,22 @@ export default function HomeScreen() {
   }));
   const title = 'Animated Title';
 
-  const renderItem = ({
-    item,
-  }: {
-    item: { id: string; title: string; description: string };
-  }) => (
-    <View style={styles.listItem}>
-      <Text style={styles.itemTitle}>{item.title}</Text>
-      <Text style={styles.itemDescription}>{item.description}</Text>
-    </View>
+  const renderItem = useCallback(
+    ({
+      item,
+    }: {
+      item: { id: string; title: string; description: string };
+    }) => (
+      <View style={styles.listItem}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
+      </View>
+    ),
+    []
   );
 
   return (
     <AnimatedHeaderFlatList
-      navigation={navigation}
       title={title}
       headerTitleStyle={styles.headerTitle}
       navigationTitleStyle={styles.navigationTitle}
