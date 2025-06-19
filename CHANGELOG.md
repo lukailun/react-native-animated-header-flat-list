@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.0 (2025-06-19)
+
+* style: fix linting issues and formatting ([0bbc213](https://github.com/lukailun/react-native-animated-header-flat-list/commit/0bbc213))
+* chore: release 1.4.3 ([25a6c67](https://github.com/lukailun/react-native-animated-header-flat-list/commit/25a6c67))
+* chore: update dependencies ([345783c](https://github.com/lukailun/react-native-animated-header-flat-list/commit/345783c))
+* chore: update dependencies to latest versions ([e25688b](https://github.com/lukailun/react-native-animated-header-flat-list/commit/e25688b))
+* chore: update dependencies to React 19 and React Native 0.79.2 ([833f0ab](https://github.com/lukailun/react-native-animated-header-flat-list/commit/833f0ab))
+* chore: update README ([7516c27](https://github.com/lukailun/react-native-animated-header-flat-list/commit/7516c27))
+
 ## <small>1.4.3 (2025-04-22)</small>
 
 * fix: update stickyHeaderContainer style to fix ui glitch on web ([5609919](https://github.com/lukailun/react-native-animated-header-flat-list/commit/5609919))
