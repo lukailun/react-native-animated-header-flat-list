@@ -14,10 +14,9 @@ import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import { getFontSizeFromStyle } from '../utils/styleUtils';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigation: any;
   title: string;
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
@@ -39,7 +38,6 @@ type AnimatedHeaderFlatListProps<T> = Omit<
 const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
 
 export function AnimatedHeaderFlatList<T>({
-  navigation,
   title,
   navigationBarColor,
   headerTitleStyle,
@@ -52,6 +50,7 @@ export function AnimatedHeaderFlatList<T>({
   navigationTitleTranslateY = 0,
   ...flatListProps
 }: AnimatedHeaderFlatListProps<T>) {
+  const navigation = useNavigation();
   const {
     scrollHandler,
     navigationBarHeight,
