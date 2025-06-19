@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.5.1 (2025-06-19)</small>
+
+* docs: remove navigation prop dependency from AnimatedHeaderFlatList component ([3ddcf50](https://github.com/lukailun/react-native-animated-header-flat-list/commit/3ddcf50))
+
 ## 1.5.0 (2025-06-19)
 
 * style: fix linting issues and formatting ([0bbc213](https://github.com/lukailun/react-native-animated-header-flat-list/commit/0bbc213))
