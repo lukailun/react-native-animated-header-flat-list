@@ -1,6 +1,6 @@
+import { useCallback } from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
-import { useCallback } from 'react';
 
 export default function HomeScreen() {
   const data = Array.from({ length: 50 }, (_, index) => ({
