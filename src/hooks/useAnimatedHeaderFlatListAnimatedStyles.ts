@@ -69,10 +69,12 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       width: 0,
       height: 0,
     });
-  const distanceBetweenTitleAndNavigationBar =
+  const distanceBetweenTitleAndNavigationBar = Math.max(
+    0,
     (navigationBarHeight - safeAreaInsets.top + headerTitleLayout.height) / 2 +
-    headerTitleLayout.y -
-    navigationBarHeight;
+      headerTitleLayout.y -
+      navigationBarHeight
+  );
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
   const stickyComponentOpacity = useSharedValue(0);
