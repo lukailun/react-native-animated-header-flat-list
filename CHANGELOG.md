@@ -1,5 +1,28 @@
 # Changelog
 
+## <small>1.6.1 (2025-12-24)</small>
+
+* chore: bump to 1.6 ([85b5e90](https://github.com/lukailun/react-native-animated-header-flat-list/commit/85b5e90))
+* chore: bump to 1.6 ([d83354e](https://github.com/lukailun/react-native-animated-header-flat-list/commit/d83354e))
+* chore: commit changes ([2e05537](https://github.com/lukailun/react-native-animated-header-flat-list/commit/2e05537))
+* chore(deps): bump form-data in the npm_and_yarn group across 1 directory ([0e4206f](https://github.com/lukailun/react-native-animated-header-flat-list/commit/0e4206f))
+* chore(deps): bump js-yaml in the npm_and_yarn group across 1 directory ([da9e204](https://github.com/lukailun/react-native-animated-header-flat-list/commit/da9e204))
+* feat: add ref in AnimatedHeaderFlatList ([677f80b](https://github.com/lukailun/react-native-animated-header-flat-list/commit/677f80b))
+* feat: add ref in AnimatedHeaderFlatList ([577a4c4](https://github.com/lukailun/react-native-animated-header-flat-list/commit/577a4c4))
+* feat: update typescript to 5.9.3 ([1b0c80f](https://github.com/lukailun/react-native-animated-header-flat-list/commit/1b0c80f))
+* feat: update typescript to 5.9.3 ([ca5ca94](https://github.com/lukailun/react-native-animated-header-flat-list/commit/ca5ca94))
+* feat: update typescript to 5.9.3 ([9687f89](https://github.com/lukailun/react-native-animated-header-flat-list/commit/9687f89))
+* evert "feat: add ref in AnimatedHeaderFlatList" ([e7351c8](https://github.com/lukailun/react-native-animated-header-flat-list/commit/e7351c8))
+* fix: use toReversed instead of reverse for style array to avoid mutating input ([33fcd78](https://github.com/lukailun/react-native-animated-header-flat-list/commit/33fcd78))
+* docs: update README ([1173f94](https://github.com/lukailun/react-native-animated-header-flat-list/commit/1173f94))
+
+
+
+## <small>1.5.1 (2025-06-19)</small>
+
+* chore: release 1.5.1 ([9a5684c](https://github.com/lukailun/react-native-animated-header-flat-list/commit/9a5684c))
+* docs: remove navigation prop dependency from AnimatedHeaderFlatList component ([3ddcf50](https://github.com/lukailun/react-native-animated-header-flat-list/commit/3ddcf50))
+
 ## <small>1.5.1 (2025-06-19)</small>
 
 * docs: remove navigation prop dependency from AnimatedHeaderFlatList component ([3ddcf50](https://github.com/lukailun/react-native-animated-header-flat-list/commit/3ddcf50))
