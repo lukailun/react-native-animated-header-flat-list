@@ -13329,7 +13329,7 @@ __metadata:
     react-native: 0.76.9
     react-native-builder-bob: ^0.40.11
     react-native-reanimated: 3.16.7
-    react-native-safe-area-context: 5.4.1
+    react-native-safe-area-context: 5.6.2
     react-native-screens: 4.11.1
     react-native-web: ^0.20.0
   languageName: unknown
@@ -13528,17 +13528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:5.4.1":
-  version: 5.4.1
-  resolution: "react-native-safe-area-context@npm:5.4.1"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 695e2a46a988725ac7a948e2a0f52fa91dbf6cfd29e7fd8c4b9e511022279cc7530fcec5dc6430415dcb5d137c593c53dd88249d41d1e049a254c32421a12d44
-  languageName: node
-  linkType: hard
-
-"react-native-safe-area-context@npm:^5.6.2":
+"react-native-safe-area-context@npm:5.6.2, react-native-safe-area-context@npm:^5.6.2":
   version: 5.6.2
   resolution: "react-native-safe-area-context@npm:5.6.2"
   peerDependencies:
