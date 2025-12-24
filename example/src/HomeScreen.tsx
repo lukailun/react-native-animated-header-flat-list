@@ -1,17 +1,8 @@
-import { useCallback, useRef } from 'react';
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { useCallback } from 'react';
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
-  const ref = useRef<FlatList>(null);
-
   const data = Array.from({ length: 50 }, (_, index) => ({
     id: `item-${index}`,
     title: `Item ${index + 1}`,
@@ -35,7 +26,6 @@ export default function HomeScreen() {
 
   return (
     <AnimatedHeaderFlatList
-      ref={ref}
       title={title}
       headerTitleStyle={styles.headerTitle}
       navigationTitleStyle={styles.navigationTitle}

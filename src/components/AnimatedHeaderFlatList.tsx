@@ -1,6 +1,5 @@
-import { type ReactElement, type RefObject, forwardRef } from 'react';
+import React, { type ReactElement } from 'react';
 import {
-  FlatList,
   StatusBar,
   StyleSheet,
   View,
@@ -38,22 +37,19 @@ type AnimatedHeaderFlatListProps<T> = Omit<
 
 const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
 
-function AnimatedHeaderFlatListInner<T>(
-  {
-    title,
-    navigationBarColor,
-    headerTitleStyle,
-    navigationTitleStyle,
-    HeaderBackground,
-    HeaderContent,
-    StickyComponent,
-    parallax = true,
-    navigationTitleTranslateX = 0,
-    navigationTitleTranslateY = 0,
-    ...flatListProps
-  }: AnimatedHeaderFlatListProps<T>,
-  ref: React.ForwardedRef<FlatList<T>>
-) {
+export function AnimatedHeaderFlatList<T>({
+  title,
+  navigationBarColor,
+  headerTitleStyle,
+  navigationTitleStyle,
+  HeaderBackground,
+  HeaderContent,
+  StickyComponent,
+  parallax = true,
+  navigationTitleTranslateX = 0,
+  navigationTitleTranslateY = 0,
+  ...flatListProps
+}: AnimatedHeaderFlatListProps<T>) {
   const navigation = useNavigation();
   const {
     scrollHandler,
@@ -241,7 +237,6 @@ function AnimatedHeaderFlatListInner<T>(
     <>
       <StatusBar backgroundColor="transparent" translucent />
       <Animated.FlatList
-        ref={ref}
         {...flatListProps}
         stickyHeaderIndices={[1]}
         ListHeaderComponent={
@@ -312,11 +307,3 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-export const AnimatedHeaderFlatList = forwardRef(
-  AnimatedHeaderFlatListInner
-) as <T>(
-  props: AnimatedHeaderFlatListProps<T> & {
-    ref?: RefObject<FlatList<T> | null>;
-  }
-) => ReactElement;
