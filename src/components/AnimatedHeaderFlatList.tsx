@@ -100,73 +100,77 @@ function AnimatedHeaderFlatListInner<T>(
     });
   }, [navigationTitle, navigation]);
 
-  const ListHeaderComponent = useMemo(() => {
-    return (
-      <View style={styles.headerWrapper}>
-        <View
-          style={[styles.headerContainer, { top: -navigationBarHeight }]}
-          onLayout={(event: LayoutChangeEvent) => {
-            setHeaderLayout({
-              ...event.nativeEvent.layout,
-              height: event.nativeEvent.layout.height + navigationBarHeight,
-            });
-          }}
-        >
-          <Animated.View
-            style={parallax ? headerBackgroundAnimatedStyle : undefined}
+  const createHeaderComponent = useCallback(
+    (key: string) => {
+      return (
+        <View style={styles.headerWrapper} key={key}>
+          <View
+            style={[styles.headerContainer, { top: -navigationBarHeight }]}
+            onLayout={(event: LayoutChangeEvent) => {
+              setHeaderLayout({
+                ...event.nativeEvent.layout,
+                height: event.nativeEvent.layout.height + navigationBarHeight,
+              });
+            }}
           >
-            <HeaderBackground />
-          </Animated.View>
-          {HeaderContent && (
             <Animated.View
+              style={parallax ? headerBackgroundAnimatedStyle : undefined}
+            >
+              <HeaderBackground />
+            </Animated.View>
+            {HeaderContent && (
+              <Animated.View
+                style={[
+                  headerContentAnimatedStyle,
+                  styles.headerContentContainer,
+                ]}
+              >
+                <HeaderContent />
+              </Animated.View>
+            )}
+            {navigationBarColor && (
+              <Animated.View
+                style={[
+                  navigationBarAnimatedStyle,
+                  styles.animatedNavigationBar,
+                  { backgroundColor: navigationBarColor },
+                ]}
+              />
+            )}
+            <Animated.Text
+              key={`${key}-title`}
+              onLayout={(event: LayoutChangeEvent) => {
+                setHeaderTitleLayout(event.nativeEvent.layout);
+              }}
+              numberOfLines={1}
               style={[
-                headerContentAnimatedStyle,
-                styles.headerContentContainer,
+                headerTitleAnimatedStyle,
+                styles.headerTitle,
+                headerTitleStyle,
               ]}
             >
-              <HeaderContent />
-            </Animated.View>
-          )}
-          {navigationBarColor && (
-            <Animated.View
-              style={[
-                navigationBarAnimatedStyle,
-                styles.animatedNavigationBar,
-                { backgroundColor: navigationBarColor },
-              ]}
-            />
-          )}
-          <Animated.Text
-            onLayout={(event: LayoutChangeEvent) => {
-              setHeaderTitleLayout(event.nativeEvent.layout);
-            }}
-            numberOfLines={1}
-            style={[
-              headerTitleAnimatedStyle,
-              styles.headerTitle,
-              headerTitleStyle,
-            ]}
-          >
-            {title}
-          </Animated.Text>
+              {title}
+            </Animated.Text>
+          </View>
         </View>
-      </View>
-    );
-  }, [
-    navigationBarHeight,
-    parallax,
-    headerBackgroundAnimatedStyle,
-    HeaderBackground,
-    HeaderContent,
-    headerContentAnimatedStyle,
-    headerTitleAnimatedStyle,
-    headerTitleStyle,
-    title,
-    setHeaderLayout,
-    setHeaderTitleLayout,
-    navigationBarAnimatedStyle,
-    navigationBarColor,
-  ]);
+      );
+    },
+    [
+      navigationBarHeight,
+      parallax,
+      headerBackgroundAnimatedStyle,
+      HeaderBackground,
+      HeaderContent,
+      headerContentAnimatedStyle,
+      headerTitleAnimatedStyle,
+      headerTitleStyle,
+      title,
+      setHeaderLayout,
+      setHeaderTitleLayout,
+      navigationBarAnimatedStyle,
+      navigationBarColor,
+    ]
+  );
 
   type CustomItem = typeof HEADER_ITEM | T;
 
@@ -194,7 +198,7 @@ function AnimatedHeaderFlatListInner<T>(
                 },
               ]}
             >
-              {ListHeaderComponent}
+              {createHeaderComponent('sticky')}
             </Animated.View>
             {StickyComponent && (
               <Animated.View
@@ -224,7 +228,7 @@ function AnimatedHeaderFlatListInner<T>(
       stickyComponentAnimatedStyle,
       stickyHeaderAnimatedStyle,
       headerLayout.height,
-      ListHeaderComponent,
+      createHeaderComponent,
       StickyComponent,
       setStickyComponentLayout,
     ]
@@ -254,7 +258,7 @@ function AnimatedHeaderFlatListInner<T>(
               },
             ]}
           >
-            {ListHeaderComponent}
+            {createHeaderComponent('main')}
           </Animated.View>
         }
         onScroll={scrollHandler}

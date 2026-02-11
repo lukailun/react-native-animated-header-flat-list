@@ -1,5 +1,5 @@
 import { useHeaderHeight } from '@react-navigation/elements';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import {
   useWindowDimensions,
   type LayoutRectangle,
@@ -10,6 +10,7 @@ import {
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
+  cancelAnimation,
   type AnimatedStyle,
   type ScrollHandlerProcessed,
 } from 'react-native-reanimated';
@@ -208,6 +209,20 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
         ? 1
         : 0;
   });
+
+  useEffect(() => {
+    return () => {
+      cancelAnimation(scrollY);
+      cancelAnimation(navigationTitleOpacity);
+      cancelAnimation(stickyHeaderOpacity);
+      cancelAnimation(stickyComponentOpacity);
+    };
+  }, [
+    scrollY,
+    navigationTitleOpacity,
+    stickyHeaderOpacity,
+    stickyComponentOpacity,
+  ]);
 
   return {
     scrollHandler,
