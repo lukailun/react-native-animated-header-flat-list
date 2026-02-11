@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.6.3 (2026-02-11)</small>
+
+* fix: reanimated clean up issue ([1dbd133](https://github.com/lukailun/react-native-animated-header-flat-list/commit/1dbd133))
+
 ## <small>1.6.2 (2026-02-11)</small>
 
 * fix: resolve Reanimated cleanup error on component unmount ([47a2e31](https://github.com/lukailun/react-native-animated-header-flat-list/commit/47a2e31))
