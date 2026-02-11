@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>1.6.2 (2026-02-11)</small>
+
+* fix: resolve Reanimated cleanup error on component unmount ([47a2e31](https://github.com/lukailun/react-native-animated-header-flat-list/commit/47a2e31))
+* chore(deps): bump node-forge ([681df8e](https://github.com/lukailun/react-native-animated-header-flat-list/commit/681df8e))
+* chore(deps): bump undici in the npm_and_yarn group across 1 directory ([ef3e572](https://github.com/lukailun/react-native-animated-header-flat-list/commit/ef3e572))
+
 ## <small>1.6.1 (2025-12-24)</small>
 
 * chore: bump to 1.6 ([85b5e90](https://github.com/lukailun/react-native-animated-header-flat-list/commit/85b5e90))
