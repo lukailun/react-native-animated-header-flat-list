@@ -1,13 +1,4 @@
-import {
-  useLayoutEffect,
-  useCallback,
-  useMemo,
-  type ReactElement,
-  type RefObject,
-  forwardRef,
-  type ComponentType,
-  type ForwardedRef,
-} from 'react';
+import { type ReactElement, type RefObject, forwardRef } from 'react';
 import {
   FlatList,
   StatusBar,
@@ -19,20 +10,21 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
+import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import { getFontSizeFromStyle } from '../utils/styleUtils';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   title: string;
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
   navigationTitleStyle?: StyleProp<TextStyle>;
-  HeaderBackground: ComponentType;
-  HeaderContent?: ComponentType;
-  StickyComponent?: ComponentType;
+  HeaderBackground: React.ComponentType;
+  HeaderContent?: React.ComponentType;
+  StickyComponent?: React.ComponentType;
   parallax?: boolean;
   navigationTitleTranslateX?: number;
   navigationTitleTranslateY?: number;
@@ -60,7 +52,7 @@ function AnimatedHeaderFlatListInner<T>(
     navigationTitleTranslateY = 0,
     ...flatListProps
   }: AnimatedHeaderFlatListProps<T>,
-  ref: ForwardedRef<FlatList<T>>
+  ref: React.ForwardedRef<FlatList<T>>
 ) {
   const navigation = useNavigation();
   const {
@@ -87,9 +79,7 @@ function AnimatedHeaderFlatListInner<T>(
 
   const navigationTitle = useCallback(
     () => (
-      <Animated.View
-        style={[styles.navigationTitleContainer, navigationTitleAnimatedStyle]}
-      >
+      <Animated.View style={navigationTitleAnimatedStyle}>
         <Animated.Text style={navigationTitleStyle} numberOfLines={1}>
           {title}
         </Animated.Text>
@@ -147,7 +137,7 @@ function AnimatedHeaderFlatListInner<T>(
               />
             )}
             <Animated.View
-              style={[styles.headerTitleContainer, headerTitleAnimatedStyle]}
+              style={headerTitleAnimatedStyle}
               onLayout={(event: LayoutChangeEvent) => {
                 setHeaderTitleLayout(event.nativeEvent.layout);
               }}
@@ -282,13 +272,6 @@ const styles = StyleSheet.create({
   navigationBar: {
     backgroundColor: 'transparent',
   },
-  navigationTitleContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    minHeight: 44,
-  },
   headerWrapper: {
     overflow: 'visible',
   },
@@ -314,14 +297,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-  },
-  headerTitleContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   headerTitle: {
     position: 'absolute',
