@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.6.6 (2026-02-12)</small>
+
+* chore: update import ([fd11651](https://github.com/lukailun/react-native-animated-header-flat-list/commit/fd11651))
+
 ## <small>1.6.5 (2026-02-12)</small>
 
 * chore: update import ([09cfe35](https://github.com/lukailun/react-native-animated-header-flat-list/commit/09cfe35))
