@@ -1,4 +1,13 @@
-import { type ReactElement, type RefObject, forwardRef } from 'react';
+import {
+  type ReactElement,
+  type RefObject,
+  forwardRef,
+  useLayoutEffect,
+  useCallback,
+  useMemo,
+  type ComponentType,
+  type ForwardedRef,
+} from 'react';
 import {
   FlatList,
   StatusBar,
@@ -10,7 +19,6 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
-import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
@@ -22,9 +30,9 @@ interface Props {
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
   navigationTitleStyle?: StyleProp<TextStyle>;
-  HeaderBackground: React.ComponentType;
-  HeaderContent?: React.ComponentType;
-  StickyComponent?: React.ComponentType;
+  HeaderBackground: ComponentType;
+  HeaderContent?: ComponentType;
+  StickyComponent?: ComponentType;
   parallax?: boolean;
   navigationTitleTranslateX?: number;
   navigationTitleTranslateY?: number;
@@ -52,7 +60,7 @@ function AnimatedHeaderFlatListInner<T>(
     navigationTitleTranslateY = 0,
     ...flatListProps
   }: AnimatedHeaderFlatListProps<T>,
-  ref: React.ForwardedRef<FlatList<T>>
+  ref: ForwardedRef<FlatList<T>>
 ) {
   const navigation = useNavigation();
   const {
