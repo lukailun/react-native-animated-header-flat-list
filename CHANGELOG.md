@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.6.4 (2026-02-12)</small>
+
+* fix: fix Cannot find host instance for this component issue ([3a8b693](https://github.com/lukailun/react-native-animated-header-flat-list/commit/3a8b693))
+
 ## <small>1.6.3 (2026-02-11)</small>
 
 * fix: reanimated clean up issue ([1dbd133](https://github.com/lukailun/react-native-animated-header-flat-list/commit/1dbd133))
