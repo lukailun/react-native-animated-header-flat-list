@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>1.6.5 (2026-02-12)</small>
+
+* chore: update import ([09cfe35](https://github.com/lukailun/react-native-animated-header-flat-list/commit/09cfe35))
+* chore: update import ([b07a8ec](https://github.com/lukailun/react-native-animated-header-flat-list/commit/b07a8ec))
+* Revert "fix: fix Cannot find host instance for this component issue" ([ffaa918](https://github.com/lukailun/react-native-animated-header-flat-list/commit/ffaa918))
+
 ## <small>1.6.4 (2026-02-12)</small>
 
 * fix: fix Cannot find host instance for this component issue ([3a8b693](https://github.com/lukailun/react-native-animated-header-flat-list/commit/3a8b693))
