@@ -13,6 +13,7 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  Text,
   type ColorValue,
   type LayoutChangeEvent,
   type ListRenderItemInfo,
@@ -86,14 +87,13 @@ function AnimatedHeaderFlatListInner<T>(
   });
 
   const navigationTitle = useCallback(
-    () =>
-      title.length > 0 ? (
-        <Animated.View style={navigationTitleAnimatedStyle}>
-          <Animated.Text style={navigationTitleStyle} numberOfLines={1}>
-            {title}
-          </Animated.Text>
-        </Animated.View>
-      ) : null,
+    () => (
+      <Animated.View style={navigationTitleAnimatedStyle}>
+        <Text style={navigationTitleStyle} numberOfLines={1}>
+          {title}
+        </Text>
+      </Animated.View>
+    ),
     [navigationTitleAnimatedStyle, navigationTitleStyle, title]
   );
 
@@ -145,22 +145,19 @@ function AnimatedHeaderFlatListInner<T>(
                 ]}
               />
             )}
-            {title.length > 0 && (
-              <Animated.View
-                style={headerTitleAnimatedStyle}
-                onLayout={(event: LayoutChangeEvent) => {
-                  setHeaderTitleLayout(event.nativeEvent.layout);
-                }}
+            <Animated.View
+              style={headerTitleAnimatedStyle}
+              onLayout={(event: LayoutChangeEvent) => {
+                setHeaderTitleLayout(event.nativeEvent.layout);
+              }}
+            >
+              <Text
+                numberOfLines={1}
+                style={[styles.headerTitle, headerTitleStyle]}
               >
-                <Animated.Text
-                  key={`${key}-title`}
-                  numberOfLines={1}
-                  style={[styles.headerTitle, headerTitleStyle]}
-                >
-                  {title}
-                </Animated.Text>
-              </Animated.View>
-            )}
+                {title}
+              </Text>
+            </Animated.View>
           </View>
         </View>
       );
