@@ -86,15 +86,14 @@ function AnimatedHeaderFlatListInner<T>(
   });
 
   const navigationTitle = useCallback(
-    () => (
-      <Animated.View style={navigationTitleAnimatedStyle}>
-        {title.length > 0 && (
+    () =>
+      title.length > 0 ? (
+        <Animated.View style={navigationTitleAnimatedStyle}>
           <Animated.Text style={navigationTitleStyle} numberOfLines={1}>
             {title}
           </Animated.Text>
-        )}
-      </Animated.View>
-    ),
+        </Animated.View>
+      ) : null,
     [navigationTitleAnimatedStyle, navigationTitleStyle, title]
   );
 
@@ -146,13 +145,13 @@ function AnimatedHeaderFlatListInner<T>(
                 ]}
               />
             )}
-            <Animated.View
-              style={headerTitleAnimatedStyle}
-              onLayout={(event: LayoutChangeEvent) => {
-                setHeaderTitleLayout(event.nativeEvent.layout);
-              }}
-            >
-              {title.length > 0 && (
+            {title.length > 0 && (
+              <Animated.View
+                style={headerTitleAnimatedStyle}
+                onLayout={(event: LayoutChangeEvent) => {
+                  setHeaderTitleLayout(event.nativeEvent.layout);
+                }}
+              >
                 <Animated.Text
                   key={`${key}-title`}
                   numberOfLines={1}
@@ -160,8 +159,8 @@ function AnimatedHeaderFlatListInner<T>(
                 >
                   {title}
                 </Animated.Text>
-              )}
-            </Animated.View>
+              </Animated.View>
+            )}
           </View>
         </View>
       );
