@@ -1,31 +1,32 @@
 {
-  "name": "react-native-animated-header-flat-list-example",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "dependencies": {
-    "@expo/metro-runtime": "~4.0.1",
-    "@react-navigation/elements": "2.4.3",
-    "@react-navigation/native": "7.1.10",
-    "@react-navigation/native-stack": "7.3.14",
-    "expo": "~52.0.46",
-    "expo-status-bar": "^2.2.3",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-native": "0.76.9",
-    "react-native-reanimated": "3.16.7",
-    "react-native-safe-area-context": "5.6.2",
-    "react-native-screens": "4.11.1",
-    "react-native-web": "^0.20.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.27.4",
-    "react-native-builder-bob": "^0.40.11"
-  },
-  "private": true
-}
+    "name": "react-native-animated-header-flat-list-example",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web"
+    },
+    "dependencies": {
+      "@expo/metro-runtime": "~4.0.1",
+      "@react-navigation/elements": "2.4.3",
+      "@react-navigation/native": "7.1.10",
+      "@react-navigation/native-stack": "7.3.14",
+      "expo": "~52.0.46",
+      "expo-status-bar": "^2.2.3",
+      "react": "18.3.1",
+      "react-dom": "18.3.1",
+      "react-native": "0.76.9",
+      "react-native-reanimated": "3.16.7",
+      "react-native-safe-area-context": "5.6.2",
+      "react-native-screens": "4.11.1",
+      "react-native-web": "^0.20.0"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.27.4",
+      "react-native-builder-bob": "^0.40.11"
+    },
+    "private": true
+  }
+    
