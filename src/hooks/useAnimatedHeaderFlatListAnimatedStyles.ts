@@ -1,5 +1,5 @@
 import { useHeaderHeight } from '@react-navigation/elements';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   useWindowDimensions,
   type LayoutRectangle,
@@ -69,12 +69,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       width: 0,
       height: 0,
     });
-  const distanceBetweenTitleAndNavigationBar = Math.max(
-    0,
-    (navigationBarHeight - safeAreaInsets.top + headerTitleLayout.height) / 2 +
-      headerTitleLayout.y -
-      navigationBarHeight
-  );
+  const distanceBetweenTitleAndNavigationBar = useSharedValue(0);
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
   const stickyComponentOpacity = useSharedValue(0);
@@ -85,6 +80,20 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     },
     [updateStickyComponentLayout, stickyComponentOpacity]
   );
+  useEffect(() => {
+    distanceBetweenTitleAndNavigationBar.value = Math.max(
+      0,
+      (navigationBarHeight - safeAreaInsets.top + headerTitleLayout.height) /
+        2 +
+        headerTitleLayout.y -
+        navigationBarHeight
+    );
+  }, [
+    headerTitleLayout,
+    navigationBarHeight,
+    safeAreaInsets.top,
+    distanceBetweenTitleAndNavigationBar,
+  ]);
   const navigationBarAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
@@ -116,7 +125,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
         {
           translateX: interpolate(
             scrollY.value,
-            [0, distanceBetweenTitleAndNavigationBar],
+            [0, distanceBetweenTitleAndNavigationBar.value],
             [
               0,
               windowWidth / 2 -
@@ -130,7 +139,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
         {
           translateY: interpolate(
             scrollY.value,
-            [0, distanceBetweenTitleAndNavigationBar],
+            [0, distanceBetweenTitleAndNavigationBar.value],
             [0, navigationTitleTranslateY],
             'clamp'
           ),
@@ -138,7 +147,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
         {
           scale: interpolate(
             scrollY.value,
-            [0, distanceBetweenTitleAndNavigationBar],
+            [0, distanceBetweenTitleAndNavigationBar.value],
             [
               1,
               navigationTitleFontSize && headerTitleFontSize
@@ -202,7 +211,9 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
     navigationTitleOpacity.value =
-      event.contentOffset.y >= distanceBetweenTitleAndNavigationBar ? 1 : 0;
+      event.contentOffset.y >= distanceBetweenTitleAndNavigationBar.value
+        ? 1
+        : 0;
     stickyHeaderOpacity.value =
       event.contentOffset.y >= headerLayout.height - navigationBarHeight * 2
         ? 1
