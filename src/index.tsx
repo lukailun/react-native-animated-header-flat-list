@@ -1,3 +1,3 @@
 import { AnimatedHeaderFlatList } from './components/AnimatedHeaderFlatList';
 
-export { AnimatedHeaderFlatList };
+export default AnimatedHeaderFlatList;

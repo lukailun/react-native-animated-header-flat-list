@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
+import AnimatedHeaderFlatList from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
   const ref = useRef<FlatList>(null);
