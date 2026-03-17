@@ -5,15 +5,15 @@ import {
   useLayoutEffect,
   useCallback,
   useMemo,
-  type ComponentType,
   type ForwardedRef,
+  type ComponentType,
+  type ReactNode,
 } from 'react';
 import {
   FlatList,
   StatusBar,
   StyleSheet,
   View,
-  Text,
   type ColorValue,
   type LayoutChangeEvent,
   type ListRenderItemInfo,
@@ -88,11 +88,12 @@ function AnimatedHeaderFlatListInner<T>(
 
   const navigationTitle = useCallback(
     () => (
-      <Animated.View style={navigationTitleAnimatedStyle}>
-        <Text style={navigationTitleStyle} numberOfLines={1}>
-          {title}
-        </Text>
-      </Animated.View>
+      <Animated.Text
+        style={[navigationTitleAnimatedStyle, navigationTitleStyle]}
+        numberOfLines={1}
+      >
+        {title}
+      </Animated.Text>
     ),
     [navigationTitleAnimatedStyle, navigationTitleStyle, title]
   );
@@ -108,81 +109,78 @@ function AnimatedHeaderFlatListInner<T>(
     });
   }, [navigationTitle, navigation]);
 
-  const createHeaderComponent = useCallback(
-    (key: string) => {
-      return (
-        <View style={styles.headerWrapper} key={key}>
-          <View
-            style={[styles.headerContainer, { top: -navigationBarHeight }]}
-            onLayout={(event: LayoutChangeEvent) => {
-              setHeaderLayout({
-                ...event.nativeEvent.layout,
-                height: event.nativeEvent.layout.height + navigationBarHeight,
-              });
-            }}
+  const ListHeaderComponent = useMemo(() => {
+    return (
+      <View style={styles.headerWrapper}>
+        <View
+          style={[styles.headerContainer, { top: -navigationBarHeight }]}
+          onLayout={(event: LayoutChangeEvent) => {
+            setHeaderLayout({
+              ...event.nativeEvent.layout,
+              height: event.nativeEvent.layout.height + navigationBarHeight,
+            });
+          }}
+        >
+          <Animated.View
+            style={parallax ? headerBackgroundAnimatedStyle : undefined}
           >
+            <HeaderBackground />
+          </Animated.View>
+          {HeaderContent && (
             <Animated.View
-              style={parallax ? headerBackgroundAnimatedStyle : undefined}
+              style={[
+                headerContentAnimatedStyle,
+                styles.headerContentContainer,
+              ]}
             >
-              <HeaderBackground />
+              <HeaderContent />
             </Animated.View>
-            {HeaderContent && (
-              <Animated.View
-                style={[
-                  headerContentAnimatedStyle,
-                  styles.headerContentContainer,
-                ]}
-              >
-                <HeaderContent />
-              </Animated.View>
-            )}
-            {navigationBarColor && (
-              <Animated.View
-                style={[
-                  navigationBarAnimatedStyle,
-                  styles.animatedNavigationBar,
-                  { backgroundColor: navigationBarColor },
-                ]}
-              />
-            )}
+          )}
+          {navigationBarColor && (
             <Animated.View
-              style={headerTitleAnimatedStyle}
-              onLayout={(event: LayoutChangeEvent) => {
-                setHeaderTitleLayout(event.nativeEvent.layout);
-              }}
-            >
-              <Text
-                numberOfLines={1}
-                style={[styles.headerTitle, headerTitleStyle]}
-              >
-                {title}
-              </Text>
-            </Animated.View>
-          </View>
+              style={[
+                navigationBarAnimatedStyle,
+                styles.animatedNavigationBar,
+                { backgroundColor: navigationBarColor },
+              ]}
+            />
+          )}
+          <Animated.Text
+            onLayout={(event: LayoutChangeEvent) => {
+              setHeaderTitleLayout(event.nativeEvent.layout);
+            }}
+            numberOfLines={1}
+            style={[
+              headerTitleAnimatedStyle,
+              styles.headerTitle,
+              headerTitleStyle,
+            ]}
+          >
+            {title}
+          </Animated.Text>
         </View>
-      );
-    },
-    [
-      navigationBarHeight,
-      parallax,
-      headerBackgroundAnimatedStyle,
-      HeaderBackground,
-      HeaderContent,
-      headerContentAnimatedStyle,
-      headerTitleAnimatedStyle,
-      headerTitleStyle,
-      title,
-      setHeaderLayout,
-      setHeaderTitleLayout,
-      navigationBarAnimatedStyle,
-      navigationBarColor,
-    ]
-  );
+      </View>
+    );
+  }, [
+    navigationBarHeight,
+    parallax,
+    headerBackgroundAnimatedStyle,
+    HeaderBackground,
+    HeaderContent,
+    headerContentAnimatedStyle,
+    headerTitleAnimatedStyle,
+    headerTitleStyle,
+    title,
+    setHeaderLayout,
+    setHeaderTitleLayout,
+    navigationBarAnimatedStyle,
+    navigationBarColor,
+  ]);
 
   type CustomItem = typeof HEADER_ITEM | T;
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<CustomItem>): ReactElement | null => {
+    ({ item }: ListRenderItemInfo<CustomItem>): ReactNode => {
       if (item === HEADER_ITEM) {
         return (
           <View
@@ -205,7 +203,7 @@ function AnimatedHeaderFlatListInner<T>(
                 },
               ]}
             >
-              {createHeaderComponent('sticky')}
+              {ListHeaderComponent}
             </Animated.View>
             {StickyComponent && (
               <Animated.View
@@ -225,9 +223,7 @@ function AnimatedHeaderFlatListInner<T>(
       }
       return flatListProps.renderItem &&
         typeof flatListProps.renderItem === 'function'
-        ? (flatListProps.renderItem({
-            item,
-          } as ListRenderItemInfo<T>) as ReactElement | null)
+        ? flatListProps.renderItem({ item } as ListRenderItemInfo<T>)
         : null;
     },
     [
@@ -237,7 +233,7 @@ function AnimatedHeaderFlatListInner<T>(
       stickyComponentAnimatedStyle,
       stickyHeaderAnimatedStyle,
       headerLayout.height,
-      createHeaderComponent,
+      ListHeaderComponent,
       StickyComponent,
       setStickyComponentLayout,
     ]
@@ -267,7 +263,7 @@ function AnimatedHeaderFlatListInner<T>(
               },
             ]}
           >
-            {createHeaderComponent('main')}
+            {ListHeaderComponent}
           </Animated.View>
         }
         onScroll={scrollHandler}
