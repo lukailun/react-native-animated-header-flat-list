@@ -1,3 +1,3 @@
-import { AnimatedHeaderFlatList } from './components/AnimatedHeaderFlatList';
-
-export { AnimatedHeaderFlatList };
+export function multiply(a: number, b: number): number {
+  return a * b;
+}

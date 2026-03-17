@@ -1,13 +1,20 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Navigation from './Navigation';
+import { Text, View, StyleSheet } from 'react-native';
+import { multiply } from 'react-native-animated-header-flat-list';
+
+const result = multiply(3, 7);
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <View style={styles.container}>
+      <Text>Result: {result}</Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
