@@ -3520,7 +3520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^2.9.10":
+"@react-navigation/elements@npm:2.9.10, @react-navigation/elements@npm:^2.9.10":
   version: 2.9.10
   resolution: "@react-navigation/elements@npm:2.9.10"
   dependencies:
@@ -3540,7 +3540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.14.5":
+"@react-navigation/native-stack@npm:7.14.5, @react-navigation/native-stack@npm:^7.14.5":
   version: 7.14.5
   resolution: "@react-navigation/native-stack@npm:7.14.5"
   dependencies:
@@ -3558,7 +3558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^7.1.33":
+"@react-navigation/native@npm:7.1.33, @react-navigation/native@npm:^7.1.33":
   version: 7.1.33
   resolution: "@react-navigation/native@npm:7.1.33"
   dependencies:
@@ -11188,6 +11188,9 @@ __metadata:
   resolution: "react-native-animated-header-flat-list-example@workspace:example"
   dependencies:
     "@expo/metro-runtime": "npm:~55.0.6"
+    "@react-navigation/elements": "npm:2.9.10"
+    "@react-navigation/native": "npm:7.1.33"
+    "@react-navigation/native-stack": "npm:7.14.5"
     expo: "npm:~55.0.6"
     expo-status-bar: "npm:~55.0.4"
     react: "npm:19.2.0"
@@ -11195,6 +11198,8 @@ __metadata:
     react-native: "npm:0.83.2"
     react-native-builder-bob: "npm:^0.40.13"
     react-native-monorepo-config: "npm:^0.3.3"
+    react-native-reanimated: "npm:4.2.2"
+    react-native-safe-area-context: "npm:5.7.0"
     react-native-web: "npm:~0.21.0"
   languageName: unknown
   linkType: soft
@@ -11304,7 +11309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^4.2.2":
+"react-native-reanimated@npm:4.2.2, react-native-reanimated@npm:^4.2.2":
   version: 4.2.2
   resolution: "react-native-reanimated@npm:4.2.2"
   dependencies:
@@ -11318,7 +11323,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.7.0":
+"react-native-safe-area-context@npm:5.7.0, react-native-safe-area-context@npm:^5.7.0":
   version: 5.7.0
   resolution: "react-native-safe-area-context@npm:5.7.0"
   peerDependencies:
