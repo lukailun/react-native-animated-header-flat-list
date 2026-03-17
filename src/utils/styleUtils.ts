@@ -3,7 +3,7 @@ import { type StyleProp, type TextStyle } from 'react-native';
 export const getFontSizeFromStyle = (textStyle: StyleProp<TextStyle>) => {
   if (!textStyle) return undefined;
   if (Array.isArray(textStyle)) {
-    for (const styleItem of textStyle.reverse()) {
+    for (const styleItem of textStyle.toReversed()) {
       if (
         styleItem &&
         typeof styleItem === 'object' &&

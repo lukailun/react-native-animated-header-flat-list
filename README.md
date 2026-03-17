@@ -6,7 +6,7 @@
 
 A React Native FlatList component with an animated collapsible header, featuring parallax effects, smooth title transitions, sticky component support, and customizable styles. Built with TypeScript and separate background/content layers in header.
 
-English | [简体中文](./README_zh.md)
+English | [简体中文](./README-zh.md)
 
 ## Preview
 

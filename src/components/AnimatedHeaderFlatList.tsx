@@ -1,5 +1,16 @@
-import React, { type ReactElement } from 'react';
 import {
+  type ReactElement,
+  type RefObject,
+  forwardRef,
+  useLayoutEffect,
+  useCallback,
+  useMemo,
+  type ForwardedRef,
+  type ComponentType,
+  type ReactNode,
+} from 'react';
+import {
+  FlatList,
   StatusBar,
   StyleSheet,
   View,
@@ -9,7 +20,6 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
-import { useLayoutEffect, useCallback, useMemo } from 'react';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
@@ -21,9 +31,9 @@ interface Props {
   navigationBarColor?: ColorValue;
   headerTitleStyle?: StyleProp<TextStyle>;
   navigationTitleStyle?: StyleProp<TextStyle>;
-  HeaderBackground: React.ComponentType;
-  HeaderContent?: React.ComponentType;
-  StickyComponent?: React.ComponentType;
+  HeaderBackground: ComponentType;
+  HeaderContent?: ComponentType;
+  StickyComponent?: ComponentType;
   parallax?: boolean;
   navigationTitleTranslateX?: number;
   navigationTitleTranslateY?: number;
@@ -37,19 +47,22 @@ type AnimatedHeaderFlatListProps<T> = Omit<
 
 const HEADER_ITEM = 'REACT_NATIVE_ANIMATED_HEADER_FLAT_LIST_HEADER';
 
-export function AnimatedHeaderFlatList<T>({
-  title,
-  navigationBarColor,
-  headerTitleStyle,
-  navigationTitleStyle,
-  HeaderBackground,
-  HeaderContent,
-  StickyComponent,
-  parallax = true,
-  navigationTitleTranslateX = 0,
-  navigationTitleTranslateY = 0,
-  ...flatListProps
-}: AnimatedHeaderFlatListProps<T>) {
+function AnimatedHeaderFlatListInner<T>(
+  {
+    title,
+    navigationBarColor,
+    headerTitleStyle,
+    navigationTitleStyle,
+    HeaderBackground,
+    HeaderContent,
+    StickyComponent,
+    parallax = true,
+    navigationTitleTranslateX = 0,
+    navigationTitleTranslateY = 0,
+    ...flatListProps
+  }: AnimatedHeaderFlatListProps<T>,
+  ref: ForwardedRef<FlatList<T>>
+) {
   const navigation = useNavigation();
   const {
     scrollHandler,
@@ -167,7 +180,7 @@ export function AnimatedHeaderFlatList<T>({
   type CustomItem = typeof HEADER_ITEM | T;
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<CustomItem>): ReactElement | null => {
+    ({ item }: ListRenderItemInfo<CustomItem>): ReactNode => {
       if (item === HEADER_ITEM) {
         return (
           <View
@@ -238,6 +251,7 @@ export function AnimatedHeaderFlatList<T>({
       <StatusBar backgroundColor="transparent" translucent />
       <Animated.FlatList
         {...flatListProps}
+        ref={ref}
         stickyHeaderIndices={[1]}
         ListHeaderComponent={
           <Animated.View
@@ -307,3 +321,11 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+export const AnimatedHeaderFlatList = forwardRef(
+  AnimatedHeaderFlatListInner
+) as <T>(
+  props: AnimatedHeaderFlatListProps<T> & {
+    ref?: RefObject<FlatList<T> | null>;
+  }
+) => ReactElement;
