@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { getFontSizeFromStyle } from '../styleUtils';
 
 describe('getFontSizeFromStyle', () => {

@@ -45,7 +45,7 @@ npm install react-native-animated-header-flat-list
 This library requires the following peer dependencies to be installed in your project:
 
 ```sh
-npm install @react-navigation/native @react-navigation/native-stack @react-navigation/elements react-native-reanimated react-native-safe-area-context
+npm install @react-navigation/native @react-navigation/native-stack @react-navigation/elements react-native-reanimated react-native-safe-area-context react-native-worklets
 ```
 
 Make sure to follow the installation instructions for each dependency:
@@ -53,12 +53,13 @@ Make sure to follow the installation instructions for each dependency:
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context#getting-started)
+- [React Native Worklets](https://docs.swmansion.com/react-native-worklets/docs/)
 
 ## Usage
 
 ```tsx
 import { useCallback } from 'react';
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { AnimatedHeaderFlatList } from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
@@ -102,8 +103,9 @@ const HeaderBackground = () => {
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
 
   return (
-    <ImageBackground
+    <Image
       source={{ uri: backgroundImageUrl }}
+      resizeMode="cover"
       style={styles.headerBackground}
     />
   );
