@@ -184,6 +184,7 @@ function AnimatedHeaderFlatListInner<T>(
       if (item === HEADER_ITEM) {
         return (
           <View
+            pointerEvents="box-none"
             style={[
               styles.stickyHeaderContainer,
               {
