@@ -192,6 +192,7 @@ function AnimatedHeaderFlatListInner<T>(
             ]}
           >
             <Animated.View
+              pointerEvents="none"
               style={[
                 stickyHeaderAnimatedStyle,
                 styles.stickyHeader,
