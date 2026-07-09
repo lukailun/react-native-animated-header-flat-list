@@ -1,12 +1,5 @@
 import { useCallback, useRef } from 'react';
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import AnimatedHeaderFlatList from 'react-native-animated-header-flat-list';
 
 export default function HomeScreen() {
@@ -52,8 +45,9 @@ const HeaderBackground = () => {
     'https://images.unsplash.com/photo-1579546929518-9e396f3cc809';
 
   return (
-    <ImageBackground
+    <Image
       source={{ uri: backgroundImageUrl }}
+      resizeMode="cover"
       style={styles.headerBackground}
     />
   );
