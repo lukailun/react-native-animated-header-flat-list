@@ -32,6 +32,7 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   stickyComponentLayout: LayoutRectangle;
   setStickyComponentLayout: (layout: LayoutRectangle) => void;
   stickyComponentAnimatedStyle: AnimatedStyle<ViewStyle>;
+  stickyOverlayAnimatedStyle: AnimatedStyle<ViewStyle>;
   navigationBarAnimatedStyle: AnimatedStyle<ViewStyle>;
   navigationTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerTitleAnimatedStyle: AnimatedStyle<ViewStyle>;
@@ -73,6 +74,12 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
   const navigationTitleOpacity = useSharedValue(0);
   const stickyHeaderOpacity = useSharedValue(0);
   const stickyComponentOpacity = useSharedValue(0);
+
+  const stickyOverlayAnimatedStyle = useAnimatedStyle(() => ({
+    opacity:
+      scrollY.value >= headerLayout.height - navigationBarHeight * 2 ? 1 : 0,
+  }));
+
   const setStickyComponentLayout = useCallback(
     (layout: LayoutRectangle) => {
       updateStickyComponentLayout(layout);
@@ -214,10 +221,9 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       event.contentOffset.y >= distanceBetweenTitleAndNavigationBar.value
         ? 1
         : 0;
+    const stickyThreshold = headerLayout.height - navigationBarHeight * 2;
     stickyHeaderOpacity.value =
-      event.contentOffset.y >= headerLayout.height - navigationBarHeight * 2
-        ? 1
-        : 0;
+      event.contentOffset.y >= stickyThreshold ? 1 : 0;
   });
 
   return {
@@ -230,6 +236,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     stickyComponentLayout,
     setStickyComponentLayout,
     stickyComponentAnimatedStyle,
+    stickyOverlayAnimatedStyle,
     navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,
