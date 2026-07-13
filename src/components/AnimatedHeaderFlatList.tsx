@@ -73,6 +73,7 @@ function AnimatedHeaderFlatListInner<T>(
     stickyComponentLayout,
     setStickyComponentLayout,
     stickyComponentAnimatedStyle,
+    stickyOverlayAnimatedStyle,
     navigationBarAnimatedStyle,
     navigationTitleAnimatedStyle,
     headerTitleAnimatedStyle,
@@ -272,6 +273,17 @@ function AnimatedHeaderFlatListInner<T>(
         data={data}
         renderItem={renderItem}
       />
+      {StickyComponent && (
+        <Animated.View
+          style={[
+            styles.stickyOverlay,
+            { top: navigationBarHeight, height: stickyComponentLayout.height },
+            stickyOverlayAnimatedStyle,
+          ]}
+        >
+          <StickyComponent />
+        </Animated.View>
+      )}
     </>
   );
 }
@@ -314,6 +326,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  stickyOverlay: {
+    width: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
   },
   headerContentContainer: {
     position: 'absolute',
