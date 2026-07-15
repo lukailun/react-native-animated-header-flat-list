@@ -129,7 +129,6 @@ function AnimatedHeaderFlatListInner<T>(
           </Animated.View>
           {HeaderContent && (
             <Animated.View
-              pointerEvents="box-none"
               style={[
                 headerContentAnimatedStyle,
                 styles.headerContentContainer,
