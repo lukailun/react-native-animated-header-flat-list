@@ -197,7 +197,32 @@ const styles = StyleSheet.create({
 | `navigationBarColor`        | ColorValue           | 否       | NavigationBar 的颜色。其透明度会根据滚动位置自动动画                         |
 | `navigationTitleTranslateX` | number               | 否       | 导航栏标题的水平偏移量。默认为 0                                             |
 | `navigationTitleTranslateY` | number               | 否       | 导航栏标题的垂直偏移量。默认为 0                                             |
+| `onScrollStateChange`       | (state: AnimatedHeaderScrollState) => void | 否 | 每次滚动时触发的回调，返回当前滚动状态                                       |
 | `...FlatListProps`          | FlatListProps        | -        | 支持所有标准的 FlatList 属性                                                 |
+
+### AnimatedHeaderScrollState
+
+`onScrollStateChange` 回调接收一个状态对象，包含以下属性：
+
+| 属性                   | 类型    | 描述                                                           |
+| ---------------------- | ------- | -------------------------------------------------------------- |
+| `scrollY`              | number  | 当前滚动距离 (contentOffset.y)                                 |
+| `isCollapsed`          | boolean | 头部是否已完全收起                                             |
+| `headerContentOpacity` | number  | Header 内容透明度，`1` 表示完全可见，`0` 表示完全隐藏          |
+
+```tsx
+<AnimatedHeaderFlatList
+  title="My Title"
+  HeaderBackground={HeaderBackground}
+  onScrollStateChange={(state) => {
+    console.log('滚动距离:', state.scrollY);
+    console.log('是否收起:', state.isCollapsed);
+    console.log('Header 透明度:', state.headerContentOpacity);
+  }}
+  data={data}
+  renderItem={renderItem}
+/>
+```
 
 ## 贡献
 

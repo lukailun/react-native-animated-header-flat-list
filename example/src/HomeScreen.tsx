@@ -11,6 +11,24 @@ export default function HomeScreen() {
   }));
   const title = 'Animated Title';
 
+  const handleScrollStateChange = useCallback(
+    (state: {
+      scrollY: number;
+      isCollapsed: boolean;
+      headerContentOpacity: number;
+    }) => {
+      console.log(
+        'scrollY:',
+        state.scrollY,
+        'isCollapsed:',
+        state.isCollapsed,
+        'headerContentOpacity:',
+        state.headerContentOpacity
+      );
+    },
+    []
+  );
+
   const renderItem = useCallback(
     ({
       item,
@@ -34,6 +52,7 @@ export default function HomeScreen() {
       HeaderBackground={HeaderBackground}
       HeaderContent={HeaderContent}
       StickyComponent={StickyComponent}
+      onScrollStateChange={handleScrollStateChange}
       data={data}
       renderItem={renderItem}
     />

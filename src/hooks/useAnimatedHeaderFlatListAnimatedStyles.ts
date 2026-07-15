@@ -9,9 +9,11 @@ import {
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   type AnimatedStyle,
   type ScrollHandlerProcessed,
+  type SharedValue,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -24,6 +26,7 @@ type AnimatedHeaderFlatListAnimatedStylesProps = {
 
 type AnimatedHeaderFlatListAnimatedStyles = {
   scrollHandler: ScrollHandlerProcessed<Record<string, unknown>>;
+  scrollY: SharedValue<number>;
   navigationBarHeight: number;
   headerLayout: LayoutRectangle;
   setHeaderLayout: (layout: LayoutRectangle) => void;
@@ -39,6 +42,8 @@ type AnimatedHeaderFlatListAnimatedStyles = {
   stickyHeaderAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerContentAnimatedStyle: AnimatedStyle<ViewStyle>;
   headerBackgroundAnimatedStyle: AnimatedStyle<ViewStyle>;
+  isSticky: Readonly<SharedValue<number>>;
+  headerOpacity: Readonly<SharedValue<number>>;
 };
 
 export const useAnimatedHeaderFlatListAnimatedStyles = ({
@@ -72,7 +77,6 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     });
   const distanceBetweenTitleAndNavigationBar = useSharedValue(0);
   const navigationTitleOpacity = useSharedValue(0);
-  const stickyHeaderOpacity = useSharedValue(0);
   const stickyComponentOpacity = useSharedValue(0);
 
   const stickyOverlayAnimatedStyle = useAnimatedStyle(() => ({
@@ -167,9 +171,13 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       ],
     };
   });
+  const isSticky = useDerivedValue((): number => {
+    const stickyThreshold = headerLayout.height - navigationBarHeight * 2;
+    return scrollY.value >= stickyThreshold ? 1 : 0;
+  });
   const stickyHeaderAnimatedStyle = useAnimatedStyle(() => {
     return {
-      opacity: stickyHeaderOpacity.value,
+      opacity: isSticky.value,
     };
   });
   const headerContentAnimatedStyle = useAnimatedStyle(() => {
@@ -215,19 +223,25 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
       opacity: stickyComponentOpacity.value,
     };
   });
+  const headerOpacity = useDerivedValue(() => {
+    return interpolate(
+      scrollY.value,
+      [0, headerLayout.height - navigationBarHeight * 2],
+      [1, 0],
+      'clamp'
+    );
+  });
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
     navigationTitleOpacity.value =
       event.contentOffset.y >= distanceBetweenTitleAndNavigationBar.value
         ? 1
         : 0;
-    const stickyThreshold = headerLayout.height - navigationBarHeight * 2;
-    stickyHeaderOpacity.value =
-      event.contentOffset.y >= stickyThreshold ? 1 : 0;
   });
 
   return {
     scrollHandler,
+    scrollY,
     navigationBarHeight,
     headerLayout,
     setHeaderLayout,
@@ -243,5 +257,7 @@ export const useAnimatedHeaderFlatListAnimatedStyles = ({
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
     headerBackgroundAnimatedStyle,
+    isSticky,
+    headerOpacity,
   };
 };

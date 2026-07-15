@@ -197,7 +197,32 @@ const styles = StyleSheet.create({
 | `navigationBarColor`        | ColorValue           | No       | Color of NavigationBar. Its opacity will automatically animate based on scroll position                        |
 | `navigationTitleTranslateX` | number               | No       | Horizontal offset for the navigation title position. Defaults to 0                                             |
 | `navigationTitleTranslateY` | number               | No       | Vertical offset for the navigation title position. Defaults to 0                                               |
+| `onScrollStateChange`       | (state: AnimatedHeaderScrollState) => void | No | Callback invoked on every scroll event with current scroll state                                               |
 | `...FlatListProps`          | FlatListProps        | -        | All standard FlatList props are supported                                                                      |
+
+### AnimatedHeaderScrollState
+
+The `onScrollStateChange` callback receives a state object with the following properties:
+
+| Property               | Type    | Description                                                              |
+| ---------------------- | ------- | ------------------------------------------------------------------------ |
+| `scrollY`              | number  | Current scroll distance (contentOffset.y)                                |
+| `isCollapsed`          | boolean | Whether the header is fully collapsed                                    |
+| `headerContentOpacity` | number  | Header content opacity, from `1` (fully visible) to `0` (fully hidden)  |
+
+```tsx
+<AnimatedHeaderFlatList
+  title="My Title"
+  HeaderBackground={HeaderBackground}
+  onScrollStateChange={(state) => {
+    console.log('Scroll Y:', state.scrollY);
+    console.log('Is collapsed:', state.isCollapsed);
+    console.log('Header opacity:', state.headerContentOpacity);
+  }}
+  data={data}
+  renderItem={renderItem}
+/>
+```
 
 ## Contributing
 

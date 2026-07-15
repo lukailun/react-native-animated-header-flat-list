@@ -21,10 +21,22 @@ import {
   type TextStyle,
 } from 'react-native';
 import type { FlatListPropsWithLayout } from 'react-native-reanimated';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  runOnJS,
+  useAnimatedReaction,
+} from 'react-native-reanimated';
 import { useAnimatedHeaderFlatListAnimatedStyles } from '../hooks/useAnimatedHeaderFlatListAnimatedStyles';
 import { getFontSizeFromStyle } from '../utils/styleUtils';
 import { useNavigation } from '@react-navigation/native';
+
+export type AnimatedHeaderScrollState = {
+  /** Current scroll distance (contentOffset.y) */
+  scrollY: number;
+  /** Whether the header is fully collapsed */
+  isCollapsed: boolean;
+  /** Header content opacity, from 1 (fully visible) to 0 (fully hidden) */
+  headerContentOpacity: number;
+};
 
 interface Props {
   title: string;
@@ -37,6 +49,7 @@ interface Props {
   parallax?: boolean;
   navigationTitleTranslateX?: number;
   navigationTitleTranslateY?: number;
+  onScrollStateChange?: (state: AnimatedHeaderScrollState) => void;
 }
 
 type AnimatedHeaderFlatListProps<T> = Omit<
@@ -59,6 +72,7 @@ function AnimatedHeaderFlatListInner<T>(
     parallax = true,
     navigationTitleTranslateX = 0,
     navigationTitleTranslateY = 0,
+    onScrollStateChange,
     ...flatListProps
   }: AnimatedHeaderFlatListProps<T>,
   ref: ForwardedRef<FlatList<T>>
@@ -66,6 +80,7 @@ function AnimatedHeaderFlatListInner<T>(
   const navigation = useNavigation();
   const {
     scrollHandler,
+    scrollY,
     navigationBarHeight,
     headerLayout,
     setHeaderLayout,
@@ -80,12 +95,31 @@ function AnimatedHeaderFlatListInner<T>(
     stickyHeaderAnimatedStyle,
     headerContentAnimatedStyle,
     headerBackgroundAnimatedStyle,
+    isSticky,
+    headerOpacity,
   } = useAnimatedHeaderFlatListAnimatedStyles({
     headerTitleFontSize: getFontSizeFromStyle(headerTitleStyle),
     navigationTitleFontSize: getFontSizeFromStyle(navigationTitleStyle),
     navigationTitleTranslateX,
     navigationTitleTranslateY,
   });
+
+  useAnimatedReaction(
+    () => ({
+      scrollY: scrollY.value,
+      isCollapsed: isSticky.value,
+      headerContentOpacity: headerOpacity.value,
+    }),
+    (current) => {
+      if (onScrollStateChange) {
+        runOnJS(onScrollStateChange)({
+          scrollY: current.scrollY,
+          isCollapsed: current.isCollapsed === 1,
+          headerContentOpacity: current.headerContentOpacity,
+        });
+      }
+    }
+  );
 
   const navigationTitle = useCallback(
     () => (
